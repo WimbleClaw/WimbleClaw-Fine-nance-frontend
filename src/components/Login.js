@@ -14,7 +14,6 @@ export default class Login extends React.Component {
             <Button className="ui purple basic button">Login</Button>
             </Form >
           </Segment >
-  
         </div>
       </div>
     );

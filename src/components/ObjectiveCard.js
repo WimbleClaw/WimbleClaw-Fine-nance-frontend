@@ -6,7 +6,7 @@ import { Card } from 'semantic-ui-react'
 export default class MainPage extends React.Component {
 
     render() {
-
+            // this will be interpolating data of the objective
         return <Card fluid
                 image='https://www.biznuspayroll.co.uk/wp-content/uploads/2015/10/Holiday.jpg'
                 header='Elliot Baker'
