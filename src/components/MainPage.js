@@ -9,10 +9,13 @@ export default class MainPage extends React.Component{
 
 render(){
     return <div>
+        {/* Divided in Grid is used for the splitting line between the sidebar and main page */}
         <Grid columns={ 2 } divided>
             <Grid.Row>
                 <Grid.Column width={ 12 }>
                     HERE IS WHERE AISA WILL BUILD HER FAVORITE PART OF THE WEB SITE
+
+                    Library to use for graphs later: <a href='https://canvasjs.com/react-charts/'> here </a>
                     <br/><br/>
                     Here's a few components ready for use (ignore the distance, it is deliberate):
                     <Signup></Signup>
