@@ -1,22 +1,21 @@
 import React from 'react'
-import { Form, Button, Segment } from 'semantic-ui-react'
+import { Form, Button, Segment, Header } from 'semantic-ui-react'
 export default class Login extends React.Component {
 
     render() {
         return (
             <div className="ui stackable center aligned page grid">
-                <Segment >
+                 <Segment style={ { marginTop: '15em' } }>
                     <Form >
-                        <h2>Sign up</h2>
+                        <Header as='h1' > Sign up</Header>
                             <Form.Input placeholder="Email" type='text' />
                             <Form.Input placeholder="Email" type='text' />
                             <Form.Input placeholder="Password" type='password' />
                             <Form.Input placeholder="Repeat password" type='password' />
-                        <Button>Sign up</Button>
+                        <Button className="ui purple basic button">Sign up</Button>
                     </Form >
                 </Segment >
             </div>
-
         );
     }
 }

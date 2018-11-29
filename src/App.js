@@ -12,7 +12,7 @@ class App extends React.Component {
     return (
       <div className="App">
           <h1>Fine-nance</h1>
-              {/* <Login></Login>  */}
+              <Login></Login> 
              <Signup></Signup>
         
       </div>
