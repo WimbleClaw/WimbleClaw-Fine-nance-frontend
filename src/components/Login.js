@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Segment, Container, Header} from 'semantic-ui-react'
+import { Form, Button, Segment} from 'semantic-ui-react'
 export default class Login extends React.Component {
 
   render() {
@@ -14,6 +14,7 @@ export default class Login extends React.Component {
             <Button className="ui purple basic button">Login</Button>
             </Form >
           </Segment >
+  
         </div>
       </div>
     );
