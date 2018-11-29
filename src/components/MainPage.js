@@ -1,6 +1,7 @@
 import React from 'react'
-import { Grid, Segment} from 'semantic-ui-react'
-
+import { Grid, Segment, Button } from 'semantic-ui-react'
+import ObjectiveCard from './ObjectiveCard'
+import SideBar from './SideBar';
 
 
 export default class MainPage extends React.Component{
@@ -12,11 +13,9 @@ render(){
                 <Grid.Column width={ 12 }>
                     HERE IS WHERE AISA WILL BUILD HER FAVORITE PART OF THE WEB SITE
                 </Grid.Column>
-                
+
                 <Grid.Column width={ 4 }>
-                    <Segment style={ { overflow: 'auto', maxHeight: 10 } }>
-                    THIS IS WHERE ED WILL MAKE A CRISPY SIDEBAR
-                    </Segment> 
+                    <SideBar></SideBar>
                 </Grid.Column>
             </Grid.Row>
         </Grid>
