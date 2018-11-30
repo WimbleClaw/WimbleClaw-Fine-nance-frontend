@@ -7,6 +7,7 @@ export default class FriendFeedCard extends React.Component{
 
 
     render(){
+   const { name } = this.props.friend
 return <Card fluid>
     < PieChart
         lineWidth='10'
@@ -20,11 +21,11 @@ return <Card fluid>
             ]
         } />
     <Card.Content>
-        <Card.Header>Matthew</Card.Header>
+        <Card.Header>{ name  }</Card.Header>
         <Card.Meta>
             <span className='date'></span>
         </Card.Meta>
-        <Card.Description>Matthew is 20% away from his new Bike! </Card.Description>
+        <Card.Description>{ name }is XX % away from his objective! </Card.Description>
     </Card.Content>
     <Card.Content extra>
         <a>

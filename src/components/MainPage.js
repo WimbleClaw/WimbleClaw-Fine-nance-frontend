@@ -48,7 +48,7 @@ export default class MainPage extends React.Component {
   };
 
   currentUser() {
-    return this.state.users.filter(user => user.id === this.state.loggedIn);
+    return this.state.users.find(user => user.id === this.state.loggedIn);
   }
 render() {
         return (
@@ -66,8 +66,12 @@ render() {
                             <Grid.Row>
                                 <Grid.Column width={ 12 }>
                                 <Switch>
-                                    <Route exact path='/spending' component={ SpendingPage } />
-                                    <Route exact path='/friends' component={ FriendsFeed } />
+                                    <Route exact path='/spending' 
+                                           component={ SpendingPage } 
+                                           />
+                                    <Route exact path='/friends'
+                                            component={ FriendsFeed }
+                                            friends={this.state.currentUser.friends} />
                                     <Route exact path='/objectives/create' component={ CreateObjectiveForm } />
                                     <Route path='/objectives/:id' component={ ObjectivePage } />
                                     <Route path='/:error' component={ props => <div>page not found</div> } />
