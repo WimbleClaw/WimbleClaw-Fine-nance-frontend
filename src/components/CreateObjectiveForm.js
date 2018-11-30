@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Button, Segment, Header } from 'semantic-ui-react'
+
 export default class CreateObjectiveForm extends React.Component {
 
     render() {
@@ -9,7 +10,8 @@ export default class CreateObjectiveForm extends React.Component {
                     <Form >
                         <Header as='h1' >Create Objective </Header>
                         <Form.Input placeholder="Name of objective" type='text' />
-                        <Form.Input placeholder="Amount to save" type='text' />
+                        <Form.Input placeholder="Image URL" type='text' />
+                        <Form.Input placeholder="Amount to save" step="100"type='number' />
                         <Form.Input placeholder="Immediately add (optional)" type='number' />
                         <Button className="ui purple basic button">Sign up</Button>
                     </Form >

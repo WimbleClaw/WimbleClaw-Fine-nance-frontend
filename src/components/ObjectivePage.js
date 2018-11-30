@@ -4,6 +4,6 @@ import React from 'react'
 export default class ObjectivePage extends React.Component {
 
     render() {
-        
+        return <div></div>
     }
 }
