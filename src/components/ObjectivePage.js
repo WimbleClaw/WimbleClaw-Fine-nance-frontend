@@ -4,6 +4,10 @@ import React from 'react'
 export default class ObjectivePage extends React.Component {
 
     render() {
-        return <div></div>
+        return <div>
+            
+            This is the objective's page :)
+
+        </div>
     }
 }
