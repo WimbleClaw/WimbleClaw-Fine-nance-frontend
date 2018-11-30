@@ -5,7 +5,6 @@ import { Grid } from "semantic-ui-react";
 import Login from "./Login";
 import Signup from "./Signup";
 import SideBar from "./SideBar";
-import HomePage from "./HomePage";
 import SpendingPage from "./SpendingPage";
 // import Adapter from "../Adapter";
 import fetchUsers from "../Adapter";
@@ -15,8 +14,7 @@ const spendingsURL = "http://localhost:3000/api/v1/spendings";
 
 export default class MainPage extends React.Component {
   state = {
-    users: [],
-    loggedIn: 1
+    users: []
   };
 
   fetchUsers = () => {
@@ -40,28 +38,23 @@ export default class MainPage extends React.Component {
     console.log("click");
   };
 
-  currentUser() {
-    return this.state.users.filter(user => user.id === this.state.loggedIn);
-  }
-
   render() {
+    console.log(this.props.fetchUsers);
     return (
       <div>
         {/* Divided in Grid is used for the splitting line between the sidebar and main page */}
-        <Grid columns={2} divided>
-          <Grid.Row>
-            <Grid.Column width={12}>
-              {/* <HomePage /> */}
-              <SpendingPage
-                currentUser={this.currentUser}
-                loggedIn={this.state.loggedIn}
-              />
-            </Grid.Column>
-            <Grid.Column width={4}>
-              <SideBar />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+
+        <div class="ui buttons">
+          <button class="ui purple basic button" onClick={this.signUpClick}>
+            Sign up
+          </button>
+        </div>
+        <div class="ui buttons">
+          <button class="ui purple basic button" onClick={this.loginClick}>
+            Login
+          </button>
+        </div>
+        {/* <SpendingPage /> */}
       </div>
     );
   }
