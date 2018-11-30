@@ -43,7 +43,7 @@ export default class MainPage extends React.Component {
   };
 
   currentUser = () => {
-    return this.state.users.filter(user => user.id === this.state.loggedIn);
+    return this.state.users.find(user => user.id === this.state.loggedIn);
   };
 
   render() {
@@ -54,10 +54,7 @@ export default class MainPage extends React.Component {
           <Grid.Row>
             <Grid.Column width={12}>
               {/* <HomePage /> */}
-              <SpendingPage
-                currentUser={this.state.currentUser}
-                loggedIn={this.state.loggedIn}
-              />
+              <SpendingPage currentUser={this.state.currentUser} />
             </Grid.Column>
             <Grid.Column width={4}>
               <SideBar />

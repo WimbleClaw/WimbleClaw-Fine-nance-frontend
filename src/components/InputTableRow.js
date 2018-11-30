@@ -15,8 +15,10 @@ export default class InputTableRow extends React.Component {
   render() {
     return (
       <Table.Row>
-        <Table.Cell>John</Table.Cell>
-        <Table.Cell>No Action</Table.Cell>
+        <Table.Cell>Clothes</Table.Cell>
+        <Table.Cell>
+          £ {this.props.spending ? this.props.spending.clothes : ""}
+        </Table.Cell>
         <Table.Cell selectable>
           <a href="#">Edit</a>
         </Table.Cell>
@@ -24,3 +26,20 @@ export default class InputTableRow extends React.Component {
     );
   }
 }
+
+// clothes:
+// 440.5
+// food:
+// 500
+// id:
+// 1
+// other:
+// 6.7
+// rent:
+// 2000
+// travel:
+// 350
+// user_id:
+// 1
+// utilities:
+// 100
