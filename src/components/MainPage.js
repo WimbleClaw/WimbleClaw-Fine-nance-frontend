@@ -12,6 +12,7 @@ export default class MainPage extends React.Component {
     return (
       <div>
         {/* Divided in Grid is used for the splitting line between the sidebar and main page */}
+        
         <Grid columns={2} divided>
           <Grid.Row>
             <Grid.Column width={12}>
