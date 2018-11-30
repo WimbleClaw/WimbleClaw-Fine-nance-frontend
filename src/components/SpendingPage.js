@@ -3,6 +3,8 @@ import React from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 import FriendsFeed from "./FriendsFeed";
+import InputTable from "./InputTable";
+
 export default class SpendingPage extends React.Component {
   render() {
     return (
@@ -26,6 +28,8 @@ export default class SpendingPage extends React.Component {
         </a>{" "}
         (i dont know how to add a title to each graph element...)
         <br /> <br />
+        <div class="ui horizontal divider">SPENDING</div>
+        <InputTable currentUser={this.props.currentUser} />
       </div>
     );
   }

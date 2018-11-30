@@ -16,6 +16,7 @@ const spendingsURL = "http://localhost:3000/api/v1/spendings";
 export default class MainPage extends React.Component {
   state = {
     users: [],
+    currentUser: "",
     loggedIn: 1
   };
 
@@ -28,8 +29,9 @@ export default class MainPage extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchUsers().then(users => this.setState({ users }));
-    this.fetchSpendings().then(spendings => this.setState({ spendings }));
+    this.fetchUsers()
+      .then(users => this.setState({ users }))
+      .then(resp => this.setState({ currentUser: this.currentUser() }));
   }
 
   signUpClick = () => {
@@ -40,9 +42,9 @@ export default class MainPage extends React.Component {
     console.log("click");
   };
 
-  currentUser() {
+  currentUser = () => {
     return this.state.users.filter(user => user.id === this.state.loggedIn);
-  }
+  };
 
   render() {
     return (
@@ -53,7 +55,7 @@ export default class MainPage extends React.Component {
             <Grid.Column width={12}>
               {/* <HomePage /> */}
               <SpendingPage
-                currentUser={this.currentUser}
+                currentUser={this.state.currentUser}
                 loggedIn={this.state.loggedIn}
               />
             </Grid.Column>
