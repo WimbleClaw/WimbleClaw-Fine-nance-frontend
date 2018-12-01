@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
 import PieChart from "react-minimal-pie-chart";
 import { Grid } from "semantic-ui-react";
+import ReactDOM from "react-dom";
+
 
 import FriendsFeed from './FriendsFeed'
 import Login from "./Login";
@@ -23,11 +25,13 @@ const spendingsURL = "http://localhost:3000/api/v1/spendings";
 export default class MainPage extends React.Component {
   state = {
     users: [],
-    loggedIn: 1
-  };
+    loggedIn: 2,
+    currentUser: {},
+    followees: []
+  }
 
   fetchUsers = () => {
-    return fetch(`${usersURL}/`).then(resp => resp.json());
+    return fetch(`${usersURL}/`).then(resp => resp.json()).then();
   };
 
   fetchSpendings = () => {
@@ -35,8 +39,8 @@ export default class MainPage extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchUsers().then(users => this.setState({ users }));
-    this.fetchSpendings().then(spendings => this.setState({ spendings }));
+      this.fetchUsers().then(users => this.setState({ users })).then(e => this.currentUser()).then(() => this.findAllFollowees())
+    this.fetchSpendings().then(spendings => this.setState({ spendings }))
   }
 
   signUpClick = () => {
@@ -47,11 +51,20 @@ export default class MainPage extends React.Component {
     console.log("click");
   };
 
-  currentUser() {
-    return this.state.users.find(user => user.id === this.state.loggedIn);
+  currentUser=() =>{
+    let currentUserObject = this.state.users.find(user => user.id === this.state.loggedIn)
+    this.setState({ currentUser: currentUserObject })
   }
+
+  findAllFollowees=()=> {
+      let followees = this.state.currentUser.followees
+      this.setState({ followees })
+  }
+
 render() {
+    console.log(this.state.users)
         return (
+            
             <div>
                 <BrowserRouter>
 
@@ -70,8 +83,8 @@ render() {
                                            component={ SpendingPage } 
                                            />
                                     <Route exact path='/friends'
-                                            component={ FriendsFeed }
-                                            friends={this.state.currentUser.friends} />
+                                            component={props=> <FriendsFeed friends={ this.state.followees }userList={this.state.users }/> }
+                                            />
                                     <Route exact path='/objectives/create' component={ CreateObjectiveForm } />
                                     <Route path='/objectives/:id' component={ ObjectivePage } />
                                     <Route path='/:error' component={ props => <div>page not found</div> } />

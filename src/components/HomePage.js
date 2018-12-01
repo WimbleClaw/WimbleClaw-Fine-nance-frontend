@@ -13,10 +13,9 @@ const usersURL = "http://localhost:3000/api/v1/users";
 const spendingsURL = "http://localhost:3000/api/v1/spendings";
 
 export default class MainPage extends React.Component {
+  
   state = {
-    spendings: '',
-    users: [],
-    
+    users: []
   };
 
   fetchUsers = () => {
@@ -40,24 +39,34 @@ export default class MainPage extends React.Component {
     console.log("click");
   };
 
+  signUpClick = () => {
+    console.log("click");
+  };
+
+  loginClick = () => {
+    console.log("click");
+  };
+
+  currentUser = () => {
+    return this.state.users.find(user => user.id === this.state.loggedIn);
+  };
+
   render() {
-    console.log(this.props.fetchUsers);
     return (
       <div>
-        {/* Divided in Grid is used for the splitting line between the sidebar and main page */}
-
+        {/* Divided in Grid is used for the splitting line between the sidebar and main page */ }
         <div class="ui buttons">
-          <button class="ui purple basic button" onClick={this.signUpClick}>
+          <button class="ui purple basic button" onClick={ this.signUpClick }>
             Sign up
           </button>
         </div>
         <div class="ui buttons">
-          <button class="ui purple basic button" onClick={this.loginClick}>
+          <button class="ui purple basic button" onClick={ this.loginClick }>
             Login
           </button>
         </div>
-        {/* <SpendingPage /> */}
+        {/* <SpendingPage /> */ }
       </div>
-    );
+    )
   }
 }
