@@ -9,7 +9,9 @@ export default class InputTable extends React.Component {
       <div>
         <Table celled>
           <InputTableHeader />
-          <InputTableRow spending={this.props.currentUser.spending} />
+          <InputTableRow 
+              spending={this.props.currentUser.spending} 
+              updateSpendingOnPage={this.props.updateSpendingOnPage}/>
         </Table>
       </div>
     );

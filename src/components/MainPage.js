@@ -51,14 +51,19 @@ export default class MainPage extends React.Component {
     this.setState({ currentUser: currentUserObject })
   }
 
+    updateSpendingOnPage = (parameter,value) =>{
+
+        let user = JSON.stringify(this.state.currentUser)
+        user = JSON.parse(user)
+        user.spending[parameter] = value
+        this.setState({ currentUser: user})
+    }
+
+
   findAllFollowees=()=> {
-      console.log('users', this.state.users)
-      console.log('curent user',this.state.currentUser)
       if (this.state.currentUser.followees.length>0) {
       let followeeIds =this.state.currentUser.followees.map(f=>f.id)
-      console.log('followeeIds', followeeIds)
       let followeeObjects = this.state.users.filter(u=>followeeIds.includes(u.id))
-      console.log('heres all the current users followees: ',followeeObjects)
       this.setState({ followees: followeeObjects})
       } else {console.log('none')}
   }
@@ -81,7 +86,10 @@ render() {
                                 <Grid.Column width={ 12 }>
                                 <Switch>
                                     <Route exact path='/spending' 
-                          component={ props => <SpendingPage { ...props } currentUser={ this.state.currentUser } /> } 
+                                         component={ props => <SpendingPage
+                                         { ...props }
+                                         currentUser={ this.state.currentUser }
+                                             updateSpendingOnPage={ this.updateSpendingOnPage } /> } 
                                            />
                                         <Route exact path='/friends' 
                                             component={ props => <FriendsFeed { ...props }

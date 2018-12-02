@@ -3,7 +3,6 @@ import PieChart from "react-minimal-pie-chart";
 
 export default class SpendingPieChart extends React.Component {
   render() {
-    console.log(this.props.currentUser.spending);
     return (
       <div>
         <PieChart

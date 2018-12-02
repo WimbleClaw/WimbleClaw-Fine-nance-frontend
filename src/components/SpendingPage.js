@@ -16,7 +16,10 @@ export default class SpendingPage extends React.Component {
         (i dont know how to add a title to each graph element...)
         <br /> <br />
         <div class="ui horizontal divider">SPENDING</div>
-        <InputTable currentUser={this.props.currentUser} />
+        <InputTable
+            currentUser={this.props.currentUser}
+            updateSpendingOnPage={ this.props.updateSpendingOnPage } />
+
       </div>
     );
   }
