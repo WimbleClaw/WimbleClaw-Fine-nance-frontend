@@ -13,8 +13,7 @@ import HomePage from "./HomePage";
 import SpendingPage from "./SpendingPage";
 import ObjectivePage from './ObjectivePage'
 import CreateObjectiveForm from "./CreateObjectiveForm";
-// import HomePage from "./HomePage";
-// import Adapter from "../Adapter";
+
 import fetchUsers from "../Adapter";
 
   
@@ -64,8 +63,6 @@ export default class MainPage extends React.Component {
   }
 
 
-
-
 render() {
     console.log(this.state.users)
         return (
@@ -96,7 +93,7 @@ render() {
                                     </Switch>
                                 </Grid.Column>
                                 <Grid.Column width={ 4 }>
-                                    <SideBar />
+                                    <SideBar friends={this.state.followees}/>
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>

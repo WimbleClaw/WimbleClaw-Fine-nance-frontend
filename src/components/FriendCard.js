@@ -1,13 +1,13 @@
 import React from 'react'
 import {Feed } from 'semantic-ui-react'
 
-const FriendCard = () =>
+const FriendCard = (props) =>
     <Feed>
         <Feed.Event>
             <Feed.Label image='/images/avatar/small/jenny.jpg' />
             <Feed.Content>
                 <Feed.Summary>
-                    Friend 1
+                    { props.friend.name }
             </Feed.Summary>
             </Feed.Content>
         </Feed.Event>

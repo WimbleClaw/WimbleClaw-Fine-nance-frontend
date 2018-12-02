@@ -6,27 +6,27 @@ import { Link } from 'react-router-dom'
 export default class FriendsList extends React.Component{
 render(){
 return (
-    
+    <Link to={ `/friends` }>
     <Segment style={ { overflow: 'auto', maxHeight: 200 } }>
         <Card fluid>
-           
+            
                 <Card.Content>
-                <Link to={ `/friends` }>
+                
                     <Header>Friends you follow</Header>
-                </Link>
+                
                 </Card.Content>
          
             <Card.Content>
-                {/* Here we will be mapping all Followers */}
-                <FriendCard></FriendCard>
-                <FriendCard></FriendCard>
-                <FriendCard></FriendCard>
-                <FriendCard></FriendCard>
-                <FriendCard></FriendCard>
-                <FriendCard></FriendCard>
-                <FriendCard></FriendCard>
+                {this.props.friends? 
+                this.props.friends.map(f=>
+                    <FriendCard
+                        friend={f}
+                        />) : "No friends followed yet"
+                }
             </Card.Content>
+            
         </Card>
     </Segment> 
+    </Link>
 )}
 }

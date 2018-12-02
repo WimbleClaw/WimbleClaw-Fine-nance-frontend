@@ -27,7 +27,7 @@ export default class SideBar extends React.Component {
                 <ObjectiveCard></ObjectiveCard>
               </Segment> 
               
-            <FriendsList></FriendsList>
+            <FriendsList friends={this.props.friends}/>
         </div>
     }
 }
