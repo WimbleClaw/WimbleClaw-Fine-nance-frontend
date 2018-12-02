@@ -24,7 +24,7 @@ const spendingsURL = "http://localhost:3000/api/v1/spendings";
 export default class MainPage extends React.Component {
   state = {
     users: [],
-    loggedIn: 2,
+    loggedIn: 3,
     currentUser: {},
     followees: []
   }
