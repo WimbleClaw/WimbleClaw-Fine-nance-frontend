@@ -54,7 +54,7 @@ patchObjective = objective => {
 
 
 render() {
-    const {objective} = this.state
+    const {objective, value} = this.state
     let current_percentage = (objective.current_amount/objective.total_amount)*100
     let remaining_percentage = 100-current_percentage
     return <div>
@@ -74,7 +74,13 @@ render() {
             <Header as='h1' >Currently saved: £{objective.current_amount} </Header>
             <Form.Input placeholder="Set new amount?" step="0.1" type='number' 
             onChange={event => this.handleChange(event.target.value)}/>
-            <Button className="ui purple basic button" onClick={this.handleSubmit}>Submit</Button>
+            <Button className="ui purple basic button" 
+                    onClick=
+                    {value <= objective.total_amount && value >= 0? 
+                        () => this.handleSubmit()
+                        :
+                        () => alert("Please provide a valid value!") 
+                }>Submit</Button>
         </Form>
         <a href='/spending'>Back to Main page</a>
     </div>
