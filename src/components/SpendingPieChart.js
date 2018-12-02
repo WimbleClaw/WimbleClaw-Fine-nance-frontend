@@ -2,13 +2,21 @@ import React from "react";
 import PieChart from "react-minimal-pie-chart";
 
 export default class SpendingPieChart extends React.Component {
+
+  componentWillReceiveProps=(props)=>{
+    console.log(props)
+  }
+
   render() {
+    
     return (
       <div>
         <PieChart
-          lineWidth="10"
-          size="small"
+          lineWidth={10}
+          animate="true"
+          animationDuration={2000}
           ratio="1"
+          rounded="true"
           style={{ height: "300px" }}
           data={[
             {

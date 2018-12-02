@@ -62,7 +62,7 @@ export default class InputTableRow extends React.Component {
     this.props.updateSpendingOnPage('clothes',value)
   }
 
-  handleUtilites=value=>{
+  handleUtilities=value=>{
     let spending={...this.props.spending}
     spending.utilities=value
     this.patchRequest(spending)
@@ -82,7 +82,7 @@ export default class InputTableRow extends React.Component {
           </Table.Cell>
           <Table.Cell selectable>
               <label>
-                Add:
+                Edit:
               <input type="number" onChange={ event => this.setState({ rent: event.target.value }) } />
                 <button
                   className="ui purple basic button"
@@ -98,7 +98,7 @@ export default class InputTableRow extends React.Component {
           </Table.Cell>
           <Table.Cell selectable>
               <label>
-                Add:
+                Edit:
               <input type="number" onChange={ event => this.setState({ utilities: event.target.value }) } />
                 <button
                   className="ui purple basic button"
@@ -114,7 +114,7 @@ export default class InputTableRow extends React.Component {
           </Table.Cell>
           <Table.Cell selectable>
               <label>
-                Add:
+                Edit:
               <input type="number" onChange={ event => this.setState({ clothes: event.target.value }) } />
                 <button
                   className="ui purple basic button"
@@ -130,7 +130,7 @@ export default class InputTableRow extends React.Component {
           </Table.Cell>
           <Table.Cell selectable>
             <label>
-              Add:
+              Edit:
               <input type="number" onChange={event => this.setState({food:event.target.value})} />
               <button 
                 className="ui purple basic button"
@@ -146,7 +146,7 @@ export default class InputTableRow extends React.Component {
           </Table.Cell>
           <Table.Cell selectable>
               <label>
-                Add:
+                Edit:
               <input type="number" onChange={ event => this.setState({ travel: event.target.value }) } />
                 <button
                   className="ui purple basic button"
@@ -162,7 +162,7 @@ export default class InputTableRow extends React.Component {
           </Table.Cell>
           <Table.Cell selectable>
               <label>
-                Add:
+                Edit:
               <input type="number" onChange={ event => this.setState({ other: event.target.value }) } />
                 <button
                   className="ui purple basic button"
