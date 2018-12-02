@@ -27,7 +27,9 @@ this.fetchObjective(objectiveId)
 
 
     render() {
-      console.log('you got it',this.state.objective)
+        const {objective} = this.state
+        let current_percentage = (objective.current_amount/objective.total_amount)*100
+        let remaining_percentage = 100-current_percentage
         return <div>
             <PieChart
                 lineWidth="10"
@@ -35,15 +37,14 @@ this.fetchObjective(objectiveId)
                 ratio="1"
                 style={ { height: "300px" } }
                 data={ [
-                    { title: "One", value: 10, color: "#E38627" },
-                    { title: "Two", value: 15, color: "#C13C37" },
-                    { title: "Three", value: 20, color: "#6A2135" }
+                    { title: "One", value: current_percentage, color: "#00FF00" },
+                    { title: "Two", value: remaining_percentage, color: "#FF6347" },
                 ] }
             />
-            This is the objective's page :)
+            <br></br>
             <Form>
-                <Header as='h1' >Goal: £XXXX :) </Header>
-                <Header as='h1' >Currently saved: £XX </Header>
+                <Header as='h1' >Goal: £{objective.total_amount} :) </Header>
+                <Header as='h1' >Currently saved: £{objective.current_amount} </Header>
                 <Form.Input placeholder="Set new amount?" step="10" type='number' 
                 onChange={this.handleChange}/>
                 <Button className="ui purple basic button" onClick={this.handleSubmit}>Submit</Button>
