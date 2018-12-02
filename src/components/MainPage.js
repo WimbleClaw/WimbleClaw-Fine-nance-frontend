@@ -26,6 +26,7 @@ export default class MainPage extends React.Component {
     followees: []
   }
 
+  
   fetchUsers = () => {
     return fetch(`${usersURL}/`).then(resp => resp.json())
   };
@@ -73,7 +74,7 @@ render() {
 
                     <Switch>
                         <Route exact path='/'
-                            component={ () => this.state.loggedIn ? <Redirect to={ '/spending' } />  : HomePage }
+                            component={ (props) => this.state.loggedIn ? <Redirect to={ '/spending' } />  : <HomePage />}
                         />
                         <Route exact path='/login' component={ Login } />
                         <Route exact path='/signup' component={ Signup } />
@@ -84,7 +85,7 @@ render() {
                                 <Grid.Column width={ 12 }>
                                 <Switch>
                                     <Route exact path='/spending' 
-                                           component={SpendingPage} 
+                          component={ props => <SpendingPage { ...props } currentUser={ this.state.currentUser } /> } 
                                            />
                                         <Route exact path='/friends' 
                                             component={ props => <FriendsFeed { ...props }

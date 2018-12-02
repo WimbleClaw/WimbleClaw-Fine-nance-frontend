@@ -30,7 +30,7 @@ handleSubmit = () =>{
     console.log('new',newObjective)
     this.patchObjective(newObjective)
     this.setState({ objective: newObjective})
-    this.changeTotal()
+    
 }
 
     componentDidMount() {
@@ -53,7 +53,7 @@ patchObjective = objective => {
         body: JSON.stringify(objective)
     }).then(resp => resp.json())
 }
-    // 
+    //
 
 
 
@@ -83,14 +83,14 @@ render() {
         <Form>
             <Header as='h1' >Goal: £{objective.total_amount} :) </Header>
             <Header as='h1' >Currently saved: £{objective.current_amount} </Header>
-            <Form.Input placeholder="Set new amount?" step="0.1" type='number' 
+            <Form.Input placeholder="Set new amount?" step="0.1" type='number'
             onChange={event => this.handleChange(event.target.value)}/>
-            <Button className="ui purple basic button" 
+            <Button className="ui purple basic button"
                     onClick=
-                    {value <= objective.total_amount && value >= 0? 
+                    {value <= objective.total_amount && value >= 0?
                         () => this.handleSubmit()
                         :
-                        () => alert("Please provide a valid value!") 
+                        () => alert("Please provide a valid value!")
                 }>Submit</Button>
         </Form>
         <a href='/spending'>Back to Main page</a>

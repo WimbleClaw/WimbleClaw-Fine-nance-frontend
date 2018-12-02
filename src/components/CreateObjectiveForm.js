@@ -62,7 +62,7 @@ submit = () =>{
                             onChange={ event => this.changeSaved(event.target.value) } placeholder="Immediately add (optional)" type='number' />
                         <Button onClick={this.submit}
                         
-                        className="ui purple basic button">Create objeective!</Button>
+                        className="ui purple basic button">Create objective!</Button>
                     </Form >
                 </Segment >
             </div>
