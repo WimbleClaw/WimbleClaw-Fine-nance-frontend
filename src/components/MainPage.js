@@ -86,10 +86,12 @@ render() {
                                     <Route exact path='/spending' 
                                            component={SpendingPage} 
                                            />
-                                    <Route exact path='/friends'
-                                            component={props=> <FriendsFeed friends={ this.state.followees }userList={this.state.users }/> }
+                                        <Route exact path='/friends' 
+                                            component={ props => <FriendsFeed { ...props }
+                                            friends={ this.state.followees }userList={this.state.users }/> }
                                             />
-                                    <Route exact path='/objectives/create' component={ CreateObjectiveForm } />
+                                    <Route exact path='/objectives/create' component={props=> <CreateObjectiveForm {...props} 
+                                    currentUser={this.state.currentUser}/> } />
                                         <Route path='/objectives/:id' 
                                         // component={() => <ObjectivePage users={this.state.users}
                                             component={ props => <ObjectivePage { ...props } users={ this.state.users}/>}
