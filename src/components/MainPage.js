@@ -93,7 +93,9 @@ render() {
                                     </Switch>
                                 </Grid.Column>
                                 <Grid.Column width={ 4 }>
-                                    <SideBar friends={this.state.followees}/>
+                                    <SideBar 
+                                    currentUser={this.state.currentUser}
+                                    friends={this.state.followees}/>
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>

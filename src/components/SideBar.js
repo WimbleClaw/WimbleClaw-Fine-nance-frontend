@@ -12,8 +12,7 @@ export default class SideBar extends React.Component {
     render() {
 
         return <div>
-            <h4>Welcome, User!</h4>
-            THIS IS WHERE ED WILL MAKE A CRISPY SIDEBAR
+            <h4>Welcome, {this.props.currentUser.name}!</h4>
             <Link to={`/`} >
                 <Button fluid> Log Out</Button><br />
             </Link>
