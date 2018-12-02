@@ -21,9 +21,8 @@ export default class SideBar extends React.Component {
             </Link>
             <Segment style={ { overflow: 'auto', maxHeight: 500 } }>
                 This is to show off the scrollability! :)
-                <ObjectiveCard></ObjectiveCard>
-                <ObjectiveCard></ObjectiveCard>
-                <ObjectiveCard></ObjectiveCard>
+                { this.props.objectives ? this.props.objectives.map(obj => <ObjectiveCard objective={ obj } />) : <div>You dont have any objectives yet</div>}
+               
               </Segment> 
               
             <FriendsList friends={this.props.friends}/>

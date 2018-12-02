@@ -9,14 +9,11 @@ import FriendsFeed from './FriendsFeed'
 import Login from "./Login";
 import Signup from "./Signup";
 import SideBar from "./SideBar";
-import HomePage from "./HomePage";
 import SpendingPage from "./SpendingPage";
 import ObjectivePage from './ObjectivePage'
 import CreateObjectiveForm from "./CreateObjectiveForm";
 
-import fetchUsers from "../Adapter";
 
-  
 
 const usersURL = "http://localhost:3000/api/v1/users";
 const spendingsURL = "http://localhost:3000/api/v1/spendings";
@@ -94,6 +91,7 @@ render() {
                                 </Grid.Column>
                                 <Grid.Column width={ 4 }>
                                     <SideBar 
+                                    objectives={this.state.currentUser.objectives}
                                     currentUser={this.state.currentUser}
                                     friends={this.state.followees}/>
                                 </Grid.Column>
