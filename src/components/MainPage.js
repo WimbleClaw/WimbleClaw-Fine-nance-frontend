@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Link} from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Link, Redirect} from 'react-router-dom'
 import PieChart from "react-minimal-pie-chart";
 import { Grid } from "semantic-ui-react";
 import ReactDOM from "react-dom";
@@ -12,7 +12,7 @@ import SideBar from "./SideBar";
 import SpendingPage from "./SpendingPage";
 import ObjectivePage from './ObjectivePage'
 import CreateObjectiveForm from "./CreateObjectiveForm";
-
+import HomePage from "./HomePage"
 
 
 const usersURL = "http://localhost:3000/api/v1/users";
@@ -72,8 +72,9 @@ render() {
                 <BrowserRouter>
 
                     <Switch>
-                        {/* userLoggedin is false?  */ }
-                        {/* <Route exact path='/' component={ HomePage } /> */ }
+                        <Route exact path='/'
+                            component={ () => this.state.loggedIn ? <Redirect to={ '/spending' } />  : HomePage }
+                        />
                         <Route exact path='/login' component={ Login } />
                         <Route exact path='/signup' component={ Signup } />
                         {/* otherwise    */ }
@@ -83,7 +84,7 @@ render() {
                                 <Grid.Column width={ 12 }>
                                 <Switch>
                                     <Route exact path='/spending' 
-                                           component={ SpendingPage } 
+                                           component={SpendingPage} 
                                            />
                                     <Route exact path='/friends'
                                             component={props=> <FriendsFeed friends={ this.state.followees }userList={this.state.users }/> }
@@ -91,7 +92,7 @@ render() {
                                     <Route exact path='/objectives/create' component={ CreateObjectiveForm } />
                                         <Route path='/objectives/:id' 
                                         // component={() => <ObjectivePage users={this.state.users}
-                                            component={ props => <ObjectivePage { ...props } users={ this.state.users} />}
+                                            component={ props => <ObjectivePage { ...props } users={ this.state.users}/>}
                                         /> } 
 
                                         />
