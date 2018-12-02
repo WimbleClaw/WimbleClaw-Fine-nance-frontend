@@ -57,9 +57,14 @@ export default class MainPage extends React.Component {
   }
 
   findAllFollowees=()=> {
-      let followees = this.state.currentUser.followees
-      this.setState({ followees })
+      let followeeIds=this.state.currentUser.followees.map(f=>f.id)
+      let followeeObjects = this.state.users.filter(u=>followeeIds.includes(u.id))
+      console.log('heres all the current users followees: ',followeeObjects)
+      this.setState({ followees: followeeObjects})
   }
+
+
+
 
 render() {
     console.log(this.state.users)
