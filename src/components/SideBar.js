@@ -20,9 +20,13 @@ export default class SideBar extends React.Component {
                 <Button className="ui purple basic button" fluid>Create a new objective! </Button>
             </Link>
             <Segment style={ { overflow: 'auto', maxHeight: 500 } }>
-                This is to show off the scrollability! :)
-                { this.props.objectives ? this.props.objectives.map(obj => <ObjectiveCard objective={ obj } />) : <div>You dont have any objectives yet</div>}
-               
+                { this.props.objectives ?
+                    this.props.objectives.map(obj =>
+                        <ObjectiveCard
+                            objective={ obj } />)
+                            : 
+                            <div>You dont have any objectives yet</div>
+                }
               </Segment> 
               
             <FriendsList friends={this.props.friends}/>

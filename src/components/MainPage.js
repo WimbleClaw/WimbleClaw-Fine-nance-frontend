@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Link} from 'react-router-dom'
 import PieChart from "react-minimal-pie-chart";
 import { Grid } from "semantic-ui-react";
 import ReactDOM from "react-dom";
@@ -85,7 +85,8 @@ render() {
                                             component={props=> <FriendsFeed friends={ this.state.followees }userList={this.state.users }/> }
                                             />
                                     <Route exact path='/objectives/create' component={ CreateObjectiveForm } />
-                                    <Route path='/objectives/:id' component={ ObjectivePage } />
+                                        <Route path='/objectives/:id' component={ ObjectivePage }
+                                        />
                                     <Route path='/:error' component={ props => <div>page not found</div> } />
                                     </Switch>
                                 </Grid.Column>

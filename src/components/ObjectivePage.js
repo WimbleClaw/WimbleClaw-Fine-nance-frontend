@@ -1,10 +1,33 @@
 import React from 'react'
 import PieChart from 'react-minimal-pie-chart'
 import { Form, Button, Segment, Header } from 'semantic-ui-react'
+
+const objectivesURL = "http://localhost:3000/api/v1/objectives";
+
+
 // This is the page that we will use for the objective data
 export default class ObjectivePage extends React.Component {
 
+
+state={
+    objective: '',
+    objectives: []
+}
+
+
+
+fetchObjective = objectiveId => {
+    return fetch(`${objectivesURL}/${objectiveId}`).then(resp => resp.json()).then(objective => this.setState({objective}))
+};
+
+componentDidMount(){   
+let objectiveId = this.props.match.params.id
+this.fetchObjective(objectiveId)
+}
+
+
     render() {
+      console.log('you got it',this.state.objective)
         return <div>
             <PieChart
                 lineWidth="10"
@@ -21,8 +44,9 @@ export default class ObjectivePage extends React.Component {
             <Form>
                 <Header as='h1' >Goal: £XXXX :) </Header>
                 <Header as='h1' >Currently saved: £XX </Header>
-                <Form.Input placeholder="Set new amount?" step="10" type='number' />
-                <Button className="ui purple basic button">Submit</Button>
+                <Form.Input placeholder="Set new amount?" step="10" type='number' 
+                onChange={this.handleChange}/>
+                <Button className="ui purple basic button" onClick={this.handleSubmit}>Submit</Button>
             </Form>
             <a href='/spending'>Back to Main page</a>
 
