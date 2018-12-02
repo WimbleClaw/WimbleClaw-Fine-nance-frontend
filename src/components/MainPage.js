@@ -27,7 +27,7 @@ export default class MainPage extends React.Component {
   }
 
   fetchUsers = () => {
-    return fetch(`${usersURL}/`).then(resp => resp.json()).then();
+    return fetch(`${usersURL}/`).then(resp => resp.json())
   };
 
   fetchSpendings = () => {
@@ -53,15 +53,19 @@ export default class MainPage extends React.Component {
   }
 
   findAllFollowees=()=> {
-      let followeeIds=this.state.currentUser.followees.map(f=>f.id)
+      console.log('users', this.state.users)
+      console.log('curent user',this.state.currentUser)
+      if (this.state.currentUser.followees.length>0) {
+      let followeeIds =this.state.currentUser.followees.map(f=>f.id)
+      console.log('followeeIds', followeeIds)
       let followeeObjects = this.state.users.filter(u=>followeeIds.includes(u.id))
       console.log('heres all the current users followees: ',followeeObjects)
       this.setState({ followees: followeeObjects})
+      } else {console.log('none')}
   }
 
 
 render() {
-    console.log(this.state.users)
         return (
             
             <div>
@@ -85,7 +89,11 @@ render() {
                                             component={props=> <FriendsFeed friends={ this.state.followees }userList={this.state.users }/> }
                                             />
                                     <Route exact path='/objectives/create' component={ CreateObjectiveForm } />
-                                        <Route path='/objectives/:id' component={ ObjectivePage }
+                                        <Route path='/objectives/:id' 
+                                        // component={() => <ObjectivePage users={this.state.users}
+                                            component={ props => <ObjectivePage { ...props } users={ this.state.users} />}
+                                        /> } 
+
                                         />
                                     <Route path='/:error' component={ props => <div>page not found</div> } />
                                     </Switch>

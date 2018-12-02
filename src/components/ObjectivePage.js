@@ -3,6 +3,7 @@ import PieChart from 'react-minimal-pie-chart'
 import { Form, Button, Segment, Header } from 'semantic-ui-react'
 
 const objectivesURL = "http://localhost:3000/api/v1/objectives";
+const usersURL = "http://localhost:3000/api/v1/users";
 
 
 // This is the page that we will use for the objective data
@@ -12,7 +13,8 @@ export default class ObjectivePage extends React.Component {
 state={
     objective: '',
     objectives: [],
-    value: 0
+    value: 0,
+    users:[]
 }
 
 
@@ -28,11 +30,13 @@ handleSubmit = () =>{
     console.log('new',newObjective)
     this.patchObjective(newObjective)
     this.setState({ objective: newObjective})
+    this.changeTotal()
 }
 
     componentDidMount() {
         let objectiveId = this.props.match.params.id
         this.fetchObjective(objectiveId)
+        this.fetchUsers().then(users=> this.setState({ users }))
     }
 
     // from adapter
@@ -50,6 +54,13 @@ patchObjective = objective => {
     }).then(resp => resp.json())
 }
     // 
+
+
+
+fetchUsers = () => {
+    return fetch(`${usersURL}/`).then(resp => resp.json())
+};
+
 
 
 
