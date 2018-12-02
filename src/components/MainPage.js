@@ -68,8 +68,6 @@ render() {
         return (
           <BrowserRouter>
             <div>
-              
-
                     <Switch>
                         <Route exact path='/'
                             component={ (props) => this.state.loggedIn ? <Redirect to={ '/spending' } />  : <HomePage />}
@@ -95,11 +93,11 @@ render() {
                                         // component={() => <ObjectivePage users={this.state.users}
                                             component={ props => <ObjectivePage { ...props } users={ this.state.users}/>}
                                         /> } 
-
                                         />
                                     <Route path='/:error' component={ props => <div>page not found</div> } />
                                     </Switch>
                                 </Grid.Column>
+
                                 <Grid.Column width={ 4 }>
                                     <SideBar 
                                     objectives={this.state.currentUser.objectives}

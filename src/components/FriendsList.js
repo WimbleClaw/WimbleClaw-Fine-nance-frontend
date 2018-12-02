@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 export default class FriendsList extends React.Component{
 render(){
-return (
+return (<div key='friend-list'>
     <Link to={ `/friends` }>
     <Segment style={ { overflow: 'auto', maxHeight: 200 } }>
         <Card fluid>
@@ -19,14 +19,15 @@ return (
             <Card.Content>
                 {this.props.friends? 
                 this.props.friends.map(f=>
-                    <FriendCard
-                        friend={f}
-                        />) : "No friends followed yet"
+                    <div key={f.id}>
+                        <FriendCard friend={f} />
+                    </div>) : "No friends followed yet"
                 }
             </Card.Content>
             
         </Card>
     </Segment> 
     </Link>
+</div>
 )}
 }

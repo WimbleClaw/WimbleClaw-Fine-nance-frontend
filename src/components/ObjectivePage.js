@@ -83,9 +83,7 @@ render() {
     let remaining_percentage = 100-current_percentage
     return <div>
         <PieChart
-            lineWidth="10"
-            size="small"
-            ratio="1"
+            lineWidth={10}
             style={ { height: "300px" } }
             data={ [
                 { title: "One", value: current_percentage, color: "#00FF00" },
