@@ -1,10 +1,10 @@
 import React from 'react'
-import {Feed } from 'semantic-ui-react'
+import {Feed, Icon } from 'semantic-ui-react'
 
 const FriendCard = (props) =>
     <Feed>
         <Feed.Event>
-            <Feed.Label image='/images/avatar/small/jenny.jpg' />
+            <Icon name='user' /> 
             <Feed.Content>
                 <Feed.Summary>
                     { props.friend.name }
