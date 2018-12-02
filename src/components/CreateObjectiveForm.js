@@ -43,7 +43,7 @@ submit = () =>{
         total_amount: this.state.total,
         img_url: this.state.image
     }
-    this.postObjective(objectiveObject).then(result=> <Redirect to={`/spending`}/>)
+    this.postObjective(objectiveObject).then(result=> <Redirect to='/spending'/>)
 }
 
     render() {
