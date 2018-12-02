@@ -1,6 +1,6 @@
 import React from 'react'
 import PieChart from 'react-minimal-pie-chart'
-import { Form, Button, Segment, Header } from 'semantic-ui-react'
+import { Form, Button, Header } from 'semantic-ui-react'
 
 const objectivesURL = "http://localhost:3000/api/v1/objectives";
 const usersURL = "http://localhost:3000/api/v1/users";
@@ -30,18 +30,31 @@ handleSubmit = () =>{
     console.log('new',newObjective)
     this.patchObjective(newObjective)
     this.setState({ objective: newObjective})
-    
 }
 
-    componentDidMount() {
-        let objectiveId = this.props.match.params.id
-        this.fetchObjective(objectiveId)
-        this.fetchUsers().then(users=> this.setState({ users }))
-    }
+componentDidMount() {
+    console.log(this.state.objective)  
+    console.log(this.props.location.state.objective)
+    let objectiveId = this.props.match.params.id
+    this.fetchObjective(objectiveId)
+    this.fetchUsers().then(users=> this.setState({ users }))
+}
+
+
+componentUpdate(){
+    console.log(this.state.objective)   
+}
 
     // from adapter
 fetchObjective = objectiveId => {
+    console.log('clicked fetch objective thing')
     return fetch(`${objectivesURL}/${objectiveId}`).then(resp => resp.json()).then(objective => this.setState({objective}))
+}
+
+getObjectiveFromLocation = () =>{
+    const {objective} = this.props.location.state
+    this.setState({ objective })
+
 }
 
 patchObjective = objective => {

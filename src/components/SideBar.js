@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Segment, Button, Card } from 'semantic-ui-react'
+import {  Segment, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 import ObjectiveCard from './ObjectiveCard'

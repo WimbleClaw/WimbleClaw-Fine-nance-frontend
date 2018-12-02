@@ -8,11 +8,13 @@ export default class MainPage extends React.Component {
     render() {
         const {objective} = this.props
         const description = `£${objective.current_amount} out of £${objective.total_amount} collected`
-        return <Link to={
+        return <Link to={ 
             {
-            pathname: `/objectives/${objective.id}`
+            pathname: `/objectives/${objective.id}`,
+            state: { objective }
+        }
             }
-        }>
+        >
         <Card fluid
                 image={objective.image? objective.image : null}
                 header={objective.name}

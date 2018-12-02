@@ -1,13 +1,4 @@
 import React from "react";
-import PieChart from "react-minimal-pie-chart";
-import { Grid } from "semantic-ui-react";
-
-import Login from "./Login";
-import Signup from "./Signup";
-import SideBar from "./SideBar";
-import SpendingPage from "./SpendingPage";
-// import Adapter from "../Adapter";
-import fetchUsers from "../Adapter";
 
 const usersURL = "http://localhost:3000/api/v1/users";
 const spendingsURL = "http://localhost:3000/api/v1/spendings";

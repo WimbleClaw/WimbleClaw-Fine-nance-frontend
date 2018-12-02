@@ -1,8 +1,6 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Link, Redirect} from 'react-router-dom'
-import PieChart from "react-minimal-pie-chart";
+import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { Grid } from "semantic-ui-react";
-import ReactDOM from "react-dom";
 
 
 import FriendsFeed from './FriendsFeed'
@@ -68,9 +66,9 @@ export default class MainPage extends React.Component {
 
 render() {
         return (
-            
+          <BrowserRouter>
             <div>
-                <BrowserRouter>
+              
 
                     <Switch>
                         <Route exact path='/'
@@ -93,7 +91,7 @@ render() {
                                             />
                                     <Route exact path='/objectives/create' component={props=> <CreateObjectiveForm {...props} 
                                     currentUser={this.state.currentUser}/> } />
-                                        <Route path='/objectives/:id' 
+                                        <Route exact path='/objectives/:id' 
                                         // component={() => <ObjectivePage users={this.state.users}
                                             component={ props => <ObjectivePage { ...props } users={ this.state.users}/>}
                                         /> } 
@@ -111,8 +109,9 @@ render() {
                             </Grid.Row>
                         </Grid>
                     </Switch>
-                </BrowserRouter>
+                
             </div>
+            </BrowserRouter>
         );
     }
 

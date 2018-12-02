@@ -17,42 +17,47 @@ export default class SpendingPieChart extends React.Component {
               value: this.props.currentUser.spending
                 ? this.props.currentUser.spending.rent
                 : 0,
-              color: "#E38627"
+              color: "#FF0000"
+              // red
             },
             {
               title: "Food",
               value: this.props.currentUser.spending
                 ? this.props.currentUser.spending.rent
                 : 0,
-              color: "#C13C37"
-            },
+              color: "#00FF00"
+              // lime
+},
             {
               title: "Other",
               value: this.props.currentUser.spending
                 ? this.props.currentUser.spending.other
                 : 0,
-              color: "#6A2135"
+              color: "#FFFF00"
+              // yellow
             },
             {
               title: "Travel",
               value: this.props.currentUser.spending
                 ? this.props.currentUser.spending.travel
                 : 0,
-              color: "#1a2f35"
+              color: "#FF00FF"
+              // magenta
             },
             {
               title: "Utilities",
               value: this.props.currentUser.spending
                 ? this.props.currentUser.spending.utilities
                 : 0,
-              color: "#1d1236"
+              color: "#00FFFF"
+              // cyan
             },
             {
               title: "Clothes",
               value: this.props.currentUser.spending
                 ? this.props.currentUser.spending.clothes
                 : 0,
-              color: "#0b0f47"
+              color: "#0000FF"
             }
           ]}
         />

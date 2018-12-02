@@ -1,8 +1,4 @@
-import PieChart from "react-minimal-pie-chart";
 import React from "react";
-import Login from "./Login";
-import Signup from "./Signup";
-import FriendsFeed from "./FriendsFeed";
 import InputTable from "./InputTable";
 import SpendingPieChart from "./SpendingPieChart";
 
