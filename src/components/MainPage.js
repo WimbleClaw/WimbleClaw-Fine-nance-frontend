@@ -78,7 +78,7 @@ export default class MainPage extends React.Component {
     }
 
     findAllFollowees=()=> {
-      if (this.state.currentUser.followees.length>0) {
+      if (this.state.currentUser && this.state.currentUser.followees.length>0) {
       let followeeIds =this.state.currentUser.followees.map(f=>f.id)
       let followeeObjects = this.state.users.filter(u=>followeeIds.includes(u.id))
       this.setState({ followees: followeeObjects})
@@ -134,6 +134,7 @@ render() {
         return (
           <BrowserRouter>
             <div>
+                { !this.state.currentUser?
                     <Switch>
                         <Route exact path='/'
                             component={ (props) => this.state.loggedIn ? <Redirect to={ '/spending' } />  : <HomePage />}
@@ -141,7 +142,11 @@ render() {
                         <Route exact path='/login' component={ Login } />
                         <Route exact path='/signup' component={ Signup } />
                         {/* otherwise    */ }
-
+                </Switch> :
+                    <Switch>
+                        <Route exact path='/'
+                            component={ (props) => this.state.loggedIn ? <Redirect to={ '/spending' } /> : <HomePage /> }
+                        />
                         <Grid columns={ 2 } divided>
                             <Grid.Row>
                                 <Grid.Column width={ 12 }>
@@ -178,8 +183,9 @@ render() {
                             </Grid.Row>
                         </Grid>
                     </Switch>
-                
+                }
             </div>
+            
             </BrowserRouter>
         );
     }
