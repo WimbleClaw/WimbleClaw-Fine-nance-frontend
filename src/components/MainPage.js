@@ -52,8 +52,21 @@ export default class MainPage extends React.Component {
     }
 
 // 
+    handleLogin=(email,password) => {
 
-
+        let foundUser = this.state.users
+        .find(user => user.email.toLowerCase() === email.toLowerCase()
+                             && user.password === password)
+                             
+        if(foundUser){
+        this.setState({loggedIn: foundUser.id})
+        this.setState({currentUser: foundUser})
+        return <Redirect to='/spending' />
+        }else{
+         alert("Incorrect details. Please try again.")
+         return;
+        }
+    }
   
   fetchUsers = () => {
     return fetch(`${usersURL}/`).then(resp => resp.json())
@@ -141,7 +154,7 @@ render() {
                         <Route exact path='/'
                             component={ (props) => this.state.loggedIn ? <Redirect to={ '/spending' } />  : <HomePage />}
                         />
-                            <Route exact path='/login' component={ props => <Login { ...props } /> }  />
+                            <Route exact path='/login' component={ props => <Login { ...props } handleLogin={this.handleLogin}/> }  />
                             <Route exact path='/signup' component={ props => <Signup { ...props } /> } />
                         {/* otherwise    */ }
                 </Switch> :

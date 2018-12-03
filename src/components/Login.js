@@ -2,6 +2,24 @@ import React from 'react'
 import { Form, Button, Segment} from 'semantic-ui-react'
 export default class Login extends React.Component {
 
+  state={
+    email: '',
+    password: ''
+  }
+
+handleEmailChange = (email) =>
+  this.setState({email})
+
+handlePasswordChange = (password) =>
+  this.setState({ password })
+
+handleSubmit=() =>{
+  const {email, password} = this.state
+  let user = this.props.handleLogin(email, password)
+  user ? this.props.history.push('/spending') : 
+  console.log('WEE!!')
+}
+
   render() {
     return (
       <div>
@@ -9,9 +27,9 @@ export default class Login extends React.Component {
           <Segment style={ { marginTop: '15em' } }>
             <Form >
               <h1>Log in</h1>
-              <Form.Input  placeholder="Email" type='text' />
-              <Form.Input   placeholder="Password" type='password' />
-            <Button className="ui purple basic button">Login</Button>
+              <Form.Input onChange={event=> this.handleEmailChange(event.target.value) } placeholder="Email" type='text' />
+              <Form.Input onChange={event => this.handlePasswordChange(event.target.value)} placeholder="Password" type='password' />
+            <Button onClick={this.handleSubmit} className="ui purple basic button">Login</Button>
             </Form >
             <a href='/signup'>Don't have an account? Click here to Sign up.</a>
           </Segment >
