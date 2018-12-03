@@ -62,8 +62,27 @@ export default class MainPage extends React.Component {
   };
 
   componentDidMount() {
-      this.fetchUsers().then(users => this.setState({ users })).then(e => this.currentUser()).then(() => this.findAllFollowees())
-    this.fetchSpendings().then(spendings => this.setState({ spendings }))
+      this.fetchUsers()
+      .then(users => this.setState({ users }))
+      .then(e => this.currentUser())
+      .then(() => this.findAllFollowees())
+
+     this.fetchSpendings()
+     .then(spendings => this.setState({ spendings }))
+  }
+
+    currentUser = () => {
+        let currentUserObject = this.state.users.find(user => user.id === this.state.loggedIn)
+        this.setState({ currentUser: currentUserObject })
+        return currentUserObject
+    }
+
+    findAllFollowees=()=> {
+      if (this.state.currentUser.followees.length>0) {
+      let followeeIds =this.state.currentUser.followees.map(f=>f.id)
+      let followeeObjects = this.state.users.filter(u=>followeeIds.includes(u.id))
+      this.setState({ followees: followeeObjects})
+      } else {console.log('none')}
   }
 
   signUpClick = () => {
@@ -74,21 +93,34 @@ export default class MainPage extends React.Component {
     console.log("click");
   };
 
-  currentUser=() =>{
-    let currentUserObject = this.state.users.find(user => user.id === this.state.loggedIn)
-    this.setState({ currentUser: currentUserObject })
-  }
+    addClick = (event, object) => {
 
-    
+        let user = this.state.currentUser;
+        user = JSON.stringify(user);
+        user = JSON.parse(user);
 
-  findAllFollowees=()=> {
-      if (this.state.currentUser.followees.length>0) {
-      let followeeIds =this.state.currentUser.followees.map(f=>f.id)
-      let followeeObjects = this.state.users.filter(u=>followeeIds.includes(u.id))
-      this.setState({ followees: followeeObjects})
-      } else {console.log('none')}
-  }
+        user.spending[object.toLowerCase()] =
+            parseInt(user.spending[object.toLowerCase()]) + parseInt(event);
 
+        this.setState({
+            currentUser: user
+        });
+
+        this.patchSpending(user.spending);
+    };
+
+    patchSpending = spending => {
+        console.log(spending);
+        return fetch(`${spendingsURL}/${spending.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(spending)
+        })
+            .then(resp => resp.json())
+            .then(result => console.log("result", result));
+    };
 
 render() {
         return (
@@ -108,12 +140,9 @@ render() {
                                 <Switch>
                                     <Route exact path='/spending' 
                                          component={ props => <SpendingPage
-                                         { ...props }
-                                         currentUser={ this.state.currentUser }
-                                             updateSpendingOnPage={ this.updateSpendingOnPage }
-                                             spendingPatchRequest={ this.spendingPatchRequest}
-                                             updateSpending={ this.updateSpending}
-                                             
+                                             { ...props }
+                                             currentUser={ this.state.currentUser }
+                                             handleClick={ this.addClick }
                                              /> } 
                                            />
                                         <Route exact path='/friends' 
