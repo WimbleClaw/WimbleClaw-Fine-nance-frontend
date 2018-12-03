@@ -36,9 +36,17 @@ export default class MainPage extends React.Component {
 
     updateSpending = (value, spendingArg, item) => {
         let spending = { ...spendingArg }
-        spending[item] = value
+        spending[item] += parseInt(value)
         this.spendingPatchRequest(spending)
         this.updateSpendingOnPage(item, value)
+    }
+
+    updateSpendingOnPage = (parameter, value) => {
+        let user = JSON.stringify(this.state.currentUser)
+        user = JSON.parse(user)
+        // user.spending[parameter]= value
+        user.spending[parameter] = parseInt(user.spending[parameter])+parseInt(value)
+        this.setState({ currentUser: user })
     }
 
 // 
@@ -71,13 +79,7 @@ export default class MainPage extends React.Component {
     this.setState({ currentUser: currentUserObject })
   }
 
-    updateSpendingOnPage = (parameter,value) =>{
-        let user = JSON.stringify(this.state.currentUser)
-        user = JSON.parse(user)
-        user.spending[parameter] = value
-        this.setState({ currentUser: user})
-    }
-
+    
 
   findAllFollowees=()=> {
       if (this.state.currentUser.followees.length>0) {

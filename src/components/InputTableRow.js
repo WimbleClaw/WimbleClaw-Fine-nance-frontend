@@ -16,9 +16,6 @@ export default class InputTableRow extends React.Component {
   }
 
 
- 
-
-
   handleFood=value=>{
     this.props.updateSpending(value, this.props.spending, 'food')
   }
