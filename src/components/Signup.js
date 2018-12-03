@@ -25,9 +25,11 @@ export default class Login extends React.Component {
             email,
             password:password1
         }
-        this.props.createUser(user).then(response => 
+        this.props.createUser(user)
+        .then(response => 
         this.props.handleSignup(response.email, response.password)
         )
+
         // run a fetch POST and redirect to main page : alert that pw are not identical 
     }else{
         alert("Please verify your input!")

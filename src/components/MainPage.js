@@ -62,9 +62,16 @@ export default class MainPage extends React.Component {
     }
 
     // 
-    handleSignup=()=>{
-        
-        
+    handleSignup=(email, password)=>{
+        this.fetchUsers()
+            .then(users => this.setState({ users })).then(() => {
+                let foundUser = this.state.users
+                    .find(user => user.email.toLowerCase() === email.toLowerCase()
+                        && user.password === password)
+                this.setState({ loggedIn: foundUser.id })
+                this.setState({ currentUser: foundUser })
+               return <Redirect to={'/spending'} />
+            })
     }
 
 
@@ -170,7 +177,7 @@ export default class MainPage extends React.Component {
                                 component={ (props) => this.state.loggedIn ? <Redirect to={ '/spending' } /> : <HomePage /> }
                             />
                             <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } /> } />
-                            <Route exact path='/signup' component={ props => <Signup { ...props } createUser={ this.createUser } handleLogin={ this.handleLogin } /> } />
+                            <Route exact path='/signup' component={ props => <Signup { ...props } createUser={ this.createUser } handleSignup={ this.handleSignup } /> } />
                             {/* otherwise    */ }
                         </Switch> :
                         <Switch>
