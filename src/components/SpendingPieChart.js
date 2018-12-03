@@ -1,63 +1,52 @@
 import React from "react";
 import PieChart from "react-minimal-pie-chart";
-
+import { Grid } from "semantic-ui-react";
 export default class SpendingPieChart extends React.Component {
+  colour = ["#E38627", "#C13C37", "#6A2135", "#1a2f35", "#1d1236", "#0b0f47"];
+  prepareData() {
+    return this.props.data.map((item, index) => {
+      const colourIndex = index % this.colour.length;
+      return {
+        title: item[0],
+        value: item[1],
+        color: this.colour[colourIndex]
+      };
+    });
+  }
+
   render() {
-    console.log(this.props.currentUser.spending);
+    const data = this.prepareData();
     return (
-      <div>
-        <PieChart
-          lineWidth="10"
-          size="small"
-          ratio="1"
-          style={{ height: "300px" }}
-          data={[
-            {
-              title: "Rent",
-              value: this.props.currentUser.spending
-                ? this.props.currentUser.spending.rent
-                : 0,
-              color: "#E38627"
-            },
-            {
-              title: "Food",
-              value: this.props.currentUser.spending
-                ? this.props.currentUser.spending.rent
-                : 0,
-              color: "#C13C37"
-            },
-            {
-              title: "Other",
-              value: this.props.currentUser.spending
-                ? this.props.currentUser.spending.other
-                : 0,
-              color: "#6A2135"
-            },
-            {
-              title: "Travel",
-              value: this.props.currentUser.spending
-                ? this.props.currentUser.spending.travel
-                : 0,
-              color: "#1a2f35"
-            },
-            {
-              title: "Utilities",
-              value: this.props.currentUser.spending
-                ? this.props.currentUser.spending.utilities
-                : 0,
-              color: "#1d1236"
-            },
-            {
-              title: "Clothes",
-              value: this.props.currentUser.spending
-                ? this.props.currentUser.spending.clothes
-                : 0,
-              color: "#0b0f47"
-            }
-          ]}
-        />
-        <div class="ui square shape" />
-      </div>
+      <Grid columns={2} divided>
+        <Grid.Row>
+          <Grid.Column width={9}>
+            <div>
+              <PieChart
+                lineWidth={25}
+                size="small"
+                ratio={1}
+                style={{ height: "300px" }}
+                data={data}
+              />
+            </div>
+          </Grid.Column>
+          <Grid.Column width={3}>
+            <h2>Key</h2>
+            <br />
+            {data.map(item => (
+              <span key={item.title}>
+                <i
+                  aria-hidden="true"
+                  className="square full icon"
+                  style={{ color: item.color }}
+                />{" "}
+                {item.title}
+                <br />
+              </span>
+            ))}
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }

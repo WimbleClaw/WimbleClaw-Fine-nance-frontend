@@ -5,11 +5,20 @@ import { Table } from "semantic-ui-react";
 
 export default class InputTable extends React.Component {
   render() {
+    const data = this.props.data;
     return (
       <div>
         <Table celled>
           <InputTableHeader />
-          <InputTableRow spending={this.props.currentUser.spending} />
+          <Table.Body>
+            {data.map(item => (
+              <InputTableRow
+                item={item}
+                key={item.title}
+                handleClick={this.props.handleClick}
+              />
+            ))}
+          </Table.Body>
         </Table>
       </div>
     );
