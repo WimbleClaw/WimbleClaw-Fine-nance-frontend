@@ -23,7 +23,7 @@ postObjective = objective => {
 };
 
 changeName=(value)=>{
-    this.setState({name:value})
+    this.setState({ name: value })
 }
 changeImage = (value) => {
     this.setState({ image: value })
@@ -34,16 +34,32 @@ changeTotal = (value) => {
 changeSaved = (value) => {
     this.setState({ saved: value })
 }
+
+
+
 submit = () =>{
     console.log('submitting?')
-   let objectiveObject={
-        user_id: this.props.currentUser.id,
-        name: this.state.name,
-        current_amount: this.state.saved,
-        total_amount: this.state.total,
-        img_url: this.state.image
-    }
-    this.postObjective(objectiveObject).then(result=> <Redirect to='/spending'/>)
+   
+        let objectiveObject={
+                user_id: this.props.currentUser.id,
+                name: this.state.name,
+                current_amount: this.state.saved,
+                total_amount: this.state.total,
+                img_url: this.state.image
+          }
+    this.postObjective(objectiveObject).then(result => {
+        this.props.addObjectiveToCurrentUser(result)
+        this.props.history.push({
+        pathname: `/objectives/${result.id}`,
+        state: { objective: result }
+    })}
+    )
+        
+        
+        
+        // `/objectives/${result.id}`))
+
+    
 }
 
     render() {

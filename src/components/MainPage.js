@@ -85,6 +85,14 @@ export default class MainPage extends React.Component {
       } else {console.log('none')}
   }
 
+
+  addObjectiveToCurrentUser=(objective)=>{
+    let user = {...this.state.currentUser}
+    user.objectives.push(objective)
+    this.setState({ currentUser:user })
+    return this.state.currentUser.objectives[this.state.currentUser.objectives.length-1]
+  }
+
   signUpClick = () => {
     console.log("click");
   };
@@ -150,7 +158,7 @@ render() {
                                             friends={ this.state.followees }userList={this.state.users }/> }
                                             />
                                     <Route exact path='/objectives/create' component={props=> <CreateObjectiveForm {...props} 
-                                    currentUser={this.state.currentUser}/> } />
+                                            currentUser={ this.state.currentUser } addObjectiveToCurrentUser={ this.addObjectiveToCurrentUser}/>  } />
                                         <Route exact path='/objectives/:id' 
                                         // component={() => <ObjectivePage users={this.state.users}
                                             component={ props => <ObjectivePage { ...props } users={ this.state.users}/>}
@@ -163,6 +171,7 @@ render() {
                                 <Grid.Column width={ 4 }>
                                     <SideBar 
                                     objectives={this.state.currentUser.objectives}
+                                    addObjectiveToCurrentUser={ this.addObjectiveToCurrentUser}
                                     currentUser={this.state.currentUser}
                                     friends={this.state.followees}/>
                                 </Grid.Column>

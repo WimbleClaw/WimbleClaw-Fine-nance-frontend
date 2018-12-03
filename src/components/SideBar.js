@@ -16,13 +16,14 @@ export default class SideBar extends React.Component {
             <Link to={`/`} >
                 <Button fluid> Log Out</Button><br />
             </Link>
-            <Link to={`/objectives/create`}>
+            <Link to={`/objectives/create`} >
                 <Button className="ui purple basic button" fluid>Create a new objective! </Button>
             </Link>
             <Segment style={ { overflow: 'auto', maxHeight: 500 } }>
                 { this.props.objectives ?
                     this.props.objectives.map(obj =>
                         <ObjectiveCard
+                        
                             objective={ obj } />)
                             : 
                             <div>You dont have any objectives yet</div>
