@@ -7,6 +7,7 @@ export default class Login extends React.Component {
     password: ''
   }
 
+
 handleEmailChange = (email) =>
   this.setState({email})
 
@@ -15,9 +16,13 @@ handlePasswordChange = (password) =>
 
 handleSubmit=() =>{
   const {email, password} = this.state
-  let user = this.props.handleLogin(email, password)
-  user ? this.props.history.push('/spending') : 
-  console.log('WEE!!')
+  let result = this.props.handleLogin(email, password)
+  result?
+  this.props.history.push({
+    pathname: `/spending`,
+  })
+  :
+  console.log('nope')
 }
 
   render() {
