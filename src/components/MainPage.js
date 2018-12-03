@@ -19,10 +19,12 @@ const spendingsURL = "http://localhost:3000/api/v1/spendings";
 export default class MainPage extends React.Component {
   state = {
     users: [],
-    loggedIn: 3,
-    currentUser: {},
+    loggedIn: false,
+    currentUser: null,
     followees: []
   }
+
+
 // transfered from inputTableRow:
     spendingPatchRequest = (spending) => {
         return fetch(`${spendingsURL}/${spending.id}`, {
@@ -139,13 +141,13 @@ render() {
                         <Route exact path='/'
                             component={ (props) => this.state.loggedIn ? <Redirect to={ '/spending' } />  : <HomePage />}
                         />
-                        <Route exact path='/login' component={ Login } />
-                        <Route exact path='/signup' component={ Signup } />
+                            <Route exact path='/login' component={ props => <Login { ...props } /> }  />
+                            <Route exact path='/signup' component={ props => <Signup { ...props } /> } />
                         {/* otherwise    */ }
                 </Switch> :
                     <Switch>
                         <Route exact path='/'
-                            component={ (props) => this.state.loggedIn ? <Redirect to={ '/spending' } /> : <HomePage /> }
+                            component={ (props) => this.state.currentUser ? <Redirect to={ '/spending'  } /> : <HomePage {...props}/> }
                         />
                         <Grid columns={ 2 } divided>
                             <Grid.Row>

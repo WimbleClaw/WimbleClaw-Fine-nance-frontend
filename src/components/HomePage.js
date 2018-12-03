@@ -22,21 +22,6 @@ export default class MainPage extends React.Component {
     this.fetchSpendings().then(spendings => this.setState({ spendings }));
   }
 
-  signUpClick = () => {
-    console.log("click");
-  };
-
-  loginClick = () => {
-    console.log("click");
-  };
-
-  signUpClick = () => {
-    console.log("click");
-  };
-
-  loginClick = () => {
-    console.log("click");
-  };
 
   currentUser = () => {
     return this.state.users.find(user => user.id === this.state.loggedIn);
@@ -47,14 +32,18 @@ export default class MainPage extends React.Component {
       <div>
         {/* Divided in Grid is used for the splitting line between the sidebar and main page */ }
         <div class="ui buttons">
+        <a href='/signup'>
           <button class="ui purple basic button" onClick={ this.signUpClick }>
             Sign up
           </button>
+          </a>
         </div>
         <div class="ui buttons">
+          <a href='/login'>
           <button class="ui purple basic button" onClick={ this.loginClick }>
             Login
           </button>
+          </a>
         </div>
         {/* <SpendingPage /> */ }
       </div>
