@@ -14,6 +14,7 @@ export default class Login extends React.Component {
                             <Form.Input placeholder="Repeat password" type='password' />
                         <Button className="ui purple basic button">Sign up</Button>
                     </Form >
+                    <a href='/login'>Already have an account? Click here to log in.</a>
                 </Segment >
             </div>
         );

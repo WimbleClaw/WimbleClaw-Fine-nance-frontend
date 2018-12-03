@@ -13,6 +13,7 @@ export default class Login extends React.Component {
               <Form.Input   placeholder="Password" type='password' />
             <Button className="ui purple basic button">Login</Button>
             </Form >
+            <a href='/signup'>Don't have an account? Click here to Sign up.</a>
           </Segment >
         </div>
       </div>
