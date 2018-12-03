@@ -11,7 +11,9 @@ export default class InputTable extends React.Component {
           <InputTableHeader />
           <InputTableRow 
               spending={this.props.currentUser.spending} 
-              updateSpendingOnPage={this.props.updateSpendingOnPage}/>
+              updateSpendingOnPage={this.props.updateSpendingOnPage}
+            spendingPatchRequest={ this.props.spendingPatchRequest }
+            updateSpending={ this.props.updateSpending }/>
         </Table>
       </div>
     );

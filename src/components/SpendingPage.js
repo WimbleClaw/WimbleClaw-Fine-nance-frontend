@@ -18,7 +18,9 @@ export default class SpendingPage extends React.Component {
         <div class="ui horizontal divider">SPENDING</div>
         <InputTable
             currentUser={this.props.currentUser}
-            updateSpendingOnPage={ this.props.updateSpendingOnPage } />
+            updateSpendingOnPage={ this.props.updateSpendingOnPage }
+          spendingPatchRequest={ this.props.spendingPatchRequest }
+          updateSpending={ this.props.updateSpending } />
 
       </div>
     );

@@ -94,7 +94,7 @@ render() {
         <Form>
             <Header as='h1' >Goal: £{objective.total_amount} :) </Header>
             <Header as='h1' >Currently saved: £{objective.current_amount} </Header>
-            <Form.Input placeholder="Set new amount?" step="0.1" type='number'
+            <Form.Input placeholder="Set new amount?" type='float'
             onChange={event => this.handleChange(event.target.value)}/>
             <Button className="ui purple basic button"
                     onClick=

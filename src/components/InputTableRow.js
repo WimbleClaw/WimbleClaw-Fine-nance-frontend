@@ -16,57 +16,31 @@ export default class InputTableRow extends React.Component {
   }
 
 
-  patchRequest=(spending)=>{
-      return fetch(`${spendingsURL}/${spending.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(spending)
-      }).then(resp => resp.json());
-  
-  }
+ 
+
 
   handleFood=value=>{
-    let spending = { ...this.props.spending }
-    spending.food = value
-    this.patchRequest(spending).then(r=>console.log(r))
-    this.props.updateSpendingOnPage('food',value)
+    this.props.updateSpending(value, this.props.spending, 'food')
   }
 
   handleRent=value=>{
-    let spending={...this.props.spending}
-    spending.rent=value
-    this.patchRequest(spending)
-    this.props.updateSpendingOnPage('rent',value)
+    this.props.updateSpending(value, this.props.spending,'rent')
   }
 
   handleOther=value=>{
-    let spending={...this.props.spending}
-    spending.other=value
-    this.patchRequest(spending)
-    this.props.updateSpendingOnPage('other',value)
+    this.props.updateSpending(value, this.props.spending, 'other')
   }
 
   handleTravel=value=>{
-    let spending={...this.props.spending}
-    spending.travel=value
-    this.patchRequest(spending)
-    this.props.updateSpendingOnPage('travel',value)
+    this.props.updateSpending(value, this.props.spending, 'travel')
   }
 
   handleClothes=value=>{
-    let spending={...this.props.spending}
-    spending.clothes=value
-    this.patchRequest(spending)
-    this.props.updateSpendingOnPage('clothes',value)
+    this.props.updateSpending(value, this.props.spending, 'clothes')
   }
 
   handleUtilities=value=>{
-    let spending={...this.props.spending}
-    spending.utilities=value
-    this.patchRequest(spending)
-    this.props.updateSpendingOnPage('utilities',value)
+    this.props.updateSpending(value, this.props.spending, 'utilities')
   }
 
 

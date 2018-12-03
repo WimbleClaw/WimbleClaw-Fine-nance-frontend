@@ -23,6 +23,26 @@ export default class MainPage extends React.Component {
     currentUser: {},
     followees: []
   }
+// transfered from inputTableRow:
+    spendingPatchRequest = (spending) => {
+        return fetch(`${spendingsURL}/${spending.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(spending)
+        }).then(resp => resp.json());
+    }
+
+    updateSpending = (value, spendingArg, item) => {
+        let spending = { ...spendingArg }
+        spending[item] = value
+        this.spendingPatchRequest(spending)
+        this.updateSpendingOnPage(item, value)
+    }
+
+// 
+
 
   
   fetchUsers = () => {
@@ -52,7 +72,6 @@ export default class MainPage extends React.Component {
   }
 
     updateSpendingOnPage = (parameter,value) =>{
-
         let user = JSON.stringify(this.state.currentUser)
         user = JSON.parse(user)
         user.spending[parameter] = value
@@ -89,7 +108,11 @@ render() {
                                          component={ props => <SpendingPage
                                          { ...props }
                                          currentUser={ this.state.currentUser }
-                                             updateSpendingOnPage={ this.updateSpendingOnPage } /> } 
+                                             updateSpendingOnPage={ this.updateSpendingOnPage }
+                                             spendingPatchRequest={ this.spendingPatchRequest}
+                                             updateSpending={ this.updateSpending}
+                                             
+                                             /> } 
                                            />
                                         <Route exact path='/friends' 
                                             component={ props => <FriendsFeed { ...props }
