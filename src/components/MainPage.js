@@ -24,14 +24,28 @@ export default class MainPage extends React.Component {
         followees: []
     }
 
+
+    postSpending = spending => {
+        return fetch(`${spendingsURL}/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(spending)
+        }).then(resp => resp.json());
+    };
+
+
     createUser = object => {
+
         return fetch(usersURL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(object)
-        }).then(resp => resp.json());
+        }).then(resp => resp.json())
+        
     };
 
 
@@ -62,16 +76,34 @@ export default class MainPage extends React.Component {
     }
 
     // 
-    handleSignup=(email, password)=>{
+    handleSignup=(email, password, spending)=>{
         this.fetchUsers()
-            .then(users => this.setState({ users })).then(() => {
-                let foundUser = this.state.users
-                    .find(user => user.email.toLowerCase() === email.toLowerCase()
-                        && user.password === password)
-                this.setState({ loggedIn: foundUser.id })
-                this.setState({ currentUser: foundUser })
-               return <Redirect to={'/spending'} />
-            })
+            .then(users => this.setState({ users })).then(
+            () => 
+                {
+                    let foundUser = this.state.users
+                        .find(user => user.email.toLowerCase() === email.toLowerCase() && user.password === password)
+                    
+                    this.setState({ loggedIn: foundUser.id })
+                    this.setState({ currentUser: foundUser })
+                    spending.user_id = foundUser.id
+
+                    this.postSpending(spending).then(resp=>{
+                        console.log('heres the entire response:', resp)
+                        let user = {...this.state.currentUser}
+                        console.log('user:', user)
+                        user.spending = resp
+                        console.log('user after setting .spending', user)
+                        this.setState ({currentUser: user})
+                        console.log('postSpending response:', resp)
+                        console.log('logged in (id) :', this.state.loggedIn)
+                        console.log('logged in as :', this.state.currentUser)
+
+                        return <Redirect to={ '/spending' } />
+                         }
+                        )
+                }
+        )
     }
 
 
@@ -181,11 +213,7 @@ export default class MainPage extends React.Component {
 
                             <Route exact path='/signup' component={ props => <Signup { ...props } createUser={ this.createUser } handleSignup={ this.handleSignup } users={this.state.users}/> } />
 
-                            <Route exact path='/new_spendings' component={ props => <CreateSpendingsForm
-                                { ...props }
-                                user={ this.state.currentUser }
-                            /> }
-                            />
+                            
                             <Route path='/:error' component={ props => <Redirect to='/' /> } />
 
                         </Switch>
@@ -202,6 +230,13 @@ export default class MainPage extends React.Component {
                                 <Grid.Row>
                                     <Grid.Column width={ 12 }>
                                         <Switch>
+
+                                            {/* <Route exact path='/new_spendings' component={ props => <CreateSpendingsForm
+                                                    { ...props }
+                                                    currentUser={ this.state.currentUser }
+                                                    users={ this.state.users }
+                                                    /> }
+                                            /> */}
 
                                             <Route exact path='/spending'
                                                 component={ props => <SpendingPage

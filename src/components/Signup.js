@@ -26,9 +26,9 @@ export default class Login extends React.Component {
             name,
             email,
             password:password1,
-            spending: {
-                id: 0,
-                user_id: 0,
+        }
+            let spending =  {
+                user_id: null,
                 rent: 0,
                 food: 0,
                 utilities: 0,
@@ -36,12 +36,12 @@ export default class Login extends React.Component {
                 travel: 0,
                 other: 0
             }
-        }
         
         userExists? alert("User already exists. Please try a different email.") :
+
         this.props.createUser(newUser)
             .then(response => 
-            this.props.handleSignup(response.email, response.password)
+            this.props.handleSignup(response.email, response.password, spending)
         )
 
         // run a fetch POST and redirect to main page : alert that pw are not identical 

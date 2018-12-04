@@ -31,6 +31,7 @@ export default class SideBar extends React.Component {
               </Segment> 
               
             <FriendsList friends={this.props.friends}/>
+            <a href="/new_spendings">click this ed pls</a>
         </div>
     }
 }

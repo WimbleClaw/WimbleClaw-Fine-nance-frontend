@@ -37,10 +37,10 @@ state={
         this.setState( { other : value  } )
     }
 
-    handleSubmit=(value) => {
+    handleSubmit=() => {
     //    patch currentUser
     //    redirect to spending page
-    
+
     }
 
 

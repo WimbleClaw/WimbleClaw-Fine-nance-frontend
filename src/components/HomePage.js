@@ -28,6 +28,7 @@ export default class MainPage extends React.Component {
   };
 
   render() {
+    console.log(this.props.currentUser)
     return (
       <div>
         {/* Divided in Grid is used for the splitting line between the sidebar and main page */ }

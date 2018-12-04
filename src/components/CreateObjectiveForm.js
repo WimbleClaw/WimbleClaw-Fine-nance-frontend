@@ -50,8 +50,8 @@ submit = () =>{
     this.postObjective(objectiveObject).then(result => {
         this.props.addObjectiveToCurrentUser(result)
         this.props.history.push({
-        pathname: `/objectives/${result.id}`,
-        state: { objective: result }
+            pathname: `/objectives/${result.id}`,
+            state: { objective: result }
     })}
     )
         
