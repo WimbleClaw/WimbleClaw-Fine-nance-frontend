@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Grid } from "semantic-ui-react";
-
+import BodyBackgroundColor from 'react-body-backgroundcolor'
 
 import FriendsFeed from './FriendsFeed'
 import Login from "./Login";
@@ -154,20 +154,22 @@ export default class MainPage extends React.Component {
             <BrowserRouter>
                 <div>
                     { !this.state.currentUser ?
-                        <Switch>
-                            
-                            <Route exact path='/'
-                                component={ (props) => this.state.loggedIn ? <Redirect to={ '/spending' } /> : <HomePage /> }
-                            />
+                        <BodyBackgroundColor backgroundColor='#BDBDBD'>
+                            <Switch>
+                                
+                                <Route exact path='/'
+                                    component={ (props) => this.state.loggedIn ? <Redirect to={ '/spending' } /> : <HomePage /> }
+                                />
 
-                            <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } fetchAndSetUsers={this.fetchAndSetUsers} /> } />
+                                <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } fetchAndSetUsers={this.fetchAndSetUsers} /> } />
 
-                            <Route exact path='/signup' component={ props => <Signup { ...props } createUser={ this.createUser } handleSignup={ this.handleSignup } users={this.state.users}/> } />
+                                <Route exact path='/signup' component={ props => <Signup { ...props } createUser={ this.createUser } handleSignup={ this.handleSignup } users={this.state.users}/> } />
 
-                            
-                            <Route path='/:error' component={ props => <Redirect to='/' /> } />
+                                
+                                <Route path='/:error' component={ props => <Redirect to='/' /> } />
 
-                        </Switch>
+                            </Switch>
+                        </BodyBackgroundColor>
                          :
                         <Switch>
 
