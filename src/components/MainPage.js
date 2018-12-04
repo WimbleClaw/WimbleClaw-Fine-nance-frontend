@@ -11,7 +11,7 @@ import SpendingPage from "./SpendingPage";
 import ObjectivePage from './ObjectivePage'
 import CreateObjectiveForm from "./CreateObjectiveForm";
 import HomePage from "./HomePage"
-
+import CreateSpendingsForm from './CreateSpendingsForm'
 
 const usersURL = "http://localhost:3000/api/v1/users";
 const spendingsURL = "http://localhost:3000/api/v1/spendings";
@@ -130,13 +130,6 @@ export default class MainPage extends React.Component {
         return this.state.currentUser.objectives[this.state.currentUser.objectives.length - 1]
     }
 
-    signUpClick = () => {
-        console.log("click");
-    };
-
-    loginClick = () => {
-        console.log("click");
-    };
 
     addClick = (event, object) => {
 
@@ -167,28 +160,49 @@ export default class MainPage extends React.Component {
             .then(result => console.log("result", result));
     };
 
+
+
+
+
+
+
     render() {
         return (
             <BrowserRouter>
                 <div>
                     { !this.state.currentUser ?
                         <Switch>
+                            
                             <Route exact path='/'
                                 component={ (props) => this.state.loggedIn ? <Redirect to={ '/spending' } /> : <HomePage /> }
                             />
+
                             <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } /> } />
-                            <Route exact path='/signup' component={ props => <Signup { ...props } createUser={ this.createUser } handleSignup={ this.handleSignup } /> } />
+
+                            <Route exact path='/signup' component={ props => <Signup { ...props } createUser={ this.createUser } handleSignup={ this.handleSignup } users={this.state.users}/> } />
+
+                            <Route exact path='/new_spendings' component={ props => <CreateSpendingsForm
+                                { ...props }
+                                user={ this.state.currentUser }
+                            /> }
+                            />
                             <Route path='/:error' component={ props => <Redirect to='/' /> } />
+
                         </Switch>
                          :
                         <Switch>
+
+                            
+
                             <Route exact path='/'
                                 component={ (props) => this.state.currentUser ? <Redirect to={ '/spending' } /> : <HomePage { ...props } /> }
                             />
+
                             <Grid columns={ 2 } divided>
                                 <Grid.Row>
                                     <Grid.Column width={ 12 }>
                                         <Switch>
+
                                             <Route exact path='/spending'
                                                 component={ props => <SpendingPage
                                                     { ...props }
@@ -196,18 +210,22 @@ export default class MainPage extends React.Component {
                                                     handleClick={ this.addClick }
                                                 /> }
                                             />
+
                                             <Route exact path='/friends'
                                                 component={ props => <FriendsFeed { ...props }
                                                     friends={ this.state.followees } userList={ this.state.users } /> }
                                             />
+
                                             <Route exact path='/objectives/create' component={ props => <CreateObjectiveForm { ...props }
                                                 currentUser={ this.state.currentUser } addObjectiveToCurrentUser={ this.addObjectiveToCurrentUser } /> } />
+
                                             <Route exact path='/objectives/:id'
-                                                // component={() => <ObjectivePage users={this.state.users}
                                                 component={ props => <ObjectivePage { ...props } users={ this.state.users } /> }
                                             /> }
+
                                             />
-                                    <Route path='/:error' component={ props => <div>page not found</div> } />
+                                            <Route path='/:error' component={ props => <div>404 :) page not found</div> } />
+
                                         </Switch>
                                     </Grid.Column>
 

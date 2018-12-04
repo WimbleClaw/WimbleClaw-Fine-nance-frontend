@@ -20,14 +20,28 @@ export default class Login extends React.Component {
         if (this.state.email && 
         this.state.password1 === this.state.password2){
         const {name, email, password1 } = this.state
-        let user={
+        let userExists = this.props.users.find(u => u.email === email)
+
+        let newUser={
             name,
             email,
-            password:password1
+            password:password1,
+            spending: {
+                id: 0,
+                user_id: 0,
+                rent: 0,
+                food: 0,
+                utilities: 0,
+                clothes: 0,
+                travel: 0,
+                other: 0
+            }
         }
-        this.props.createUser(user)
-        .then(response => 
-        this.props.handleSignup(response.email, response.password)
+        
+        userExists? alert("User already exists. Please try a different email.") :
+        this.props.createUser(newUser)
+            .then(response => 
+            this.props.handleSignup(response.email, response.password)
         )
 
         // run a fetch POST and redirect to main page : alert that pw are not identical 
