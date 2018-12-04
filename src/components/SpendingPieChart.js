@@ -34,6 +34,7 @@ export default class SpendingPieChart extends React.Component {
             <h2>Key</h2>
             <br />
             {data.map(item => (
+              <div>
               <span key={item.title}>
                 <i
                   aria-hidden="true"
@@ -41,8 +42,9 @@ export default class SpendingPieChart extends React.Component {
                   style={{ color: item.color }}
                 />{" "}
                 {item.title}
-                <br />
               </span>
+              <br></br>
+              </div>
             ))}
           </Grid.Column>
         </Grid.Row>
