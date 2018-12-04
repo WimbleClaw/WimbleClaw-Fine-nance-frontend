@@ -13,7 +13,7 @@ export default class SideBar extends React.Component {
         return <div>
             <h4>Welcome, {this.props.currentUser.name}!</h4>
             <Link to={`/`} >
-                <Button fluid> Log Out</Button><br />
+                <Button fluid> Home</Button><br />
             </Link>
             <Link to={`/objectives/create`} >
                 <Button className="ui purple basic button" fluid>Create a new objective! </Button>
@@ -30,7 +30,7 @@ export default class SideBar extends React.Component {
             <div>
                 { this.props.currentUser.token && <h4> Your follow token: { this.props.currentUser.token }</h4> }
                 <FollowForm users={ this.props.users } currentUser={ this.props.currentUser }
-                    friends={ this.props.followees } />
+                    friends={ this.props.followees } addFriendOnPage={ this.props.addFriendOnPage} />
             </div>
             <FriendsList friends={this.props.friends}/>
         </div>

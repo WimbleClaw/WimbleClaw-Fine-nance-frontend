@@ -1,4 +1,5 @@
 import React from "react";
+import {Segment} from 'semantic-ui-react'
 
 const usersURL = "http://localhost:3000/api/v1/users";
 const spendingsURL = "http://localhost:3000/api/v1/spendings";
@@ -31,6 +32,7 @@ export default class MainPage extends React.Component {
     console.log(this.props.currentUser)
     return (
       <div>
+        <Segment style={ { marginTop: '15em' } }>
         {/* Divided in Grid is used for the splitting line between the sidebar and main page */ }
         <div class="ui buttons">
         <a href='/signup'>
@@ -47,6 +49,7 @@ export default class MainPage extends React.Component {
           </a>
         </div>
         {/* <SpendingPage /> */ }
+        </Segment>
       </div>
     )
   }

@@ -16,7 +16,7 @@ export default class Login extends React.Component {
     }
 
     handleEmailChange=(value)=>this.setState({email: value})
-    handleNameChange = (value) => this.setState({ Name: value })
+    handleNameChange = (value) => this.setState({ name: value })
     handlePW1Change = (value) => this.setState({ password1: value })
     handlePW2Change = (value) => this.setState({ password2: value })
 

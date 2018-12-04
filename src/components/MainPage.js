@@ -99,6 +99,27 @@ export default class MainPage extends React.Component {
     }
 
 
+    addFriendOnPage=(friend)=>{
+        let user = {...this.state.currentUser}
+        let followees = [...this.state.followees]
+
+        
+        if(followees.includes(friend))
+        {alert("Friend already added.") 
+                            return false}
+
+        else{
+            followees.push(friend)
+            user.followees.push(friend)
+            this.setState({ 
+                currentUser: user, 
+                followees:followees
+            })
+
+         return true
+        }
+    }
+
     addObjectiveToCurrentUser = (objective) => {
         let user = { ...this.state.currentUser }
         user.objectives.push(objective)
@@ -194,7 +215,9 @@ export default class MainPage extends React.Component {
                                             objectives={ this.state.currentUser.objectives }
                                             addObjectiveToCurrentUser={ this.addObjectiveToCurrentUser }
                                             currentUser={ this.state.currentUser }
-                                            friends={ this.state.followees } />
+                                            friends={ this.state.followees }
+                                            addFriendOnPage={ this.addFriendOnPage }
+                                            users={this.state.users} />
                                     </Grid.Column>
                                 </Grid.Row>
                             </Grid>
