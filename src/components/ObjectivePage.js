@@ -104,7 +104,7 @@ render() {
                         () => alert("Please provide a valid value!")
                 }>Submit</Button>
         </Form>
-        <a href='/spending'>Back to Main page</a>
+        <a href='/'>Back to Main page</a>
     </div>
 }
 }

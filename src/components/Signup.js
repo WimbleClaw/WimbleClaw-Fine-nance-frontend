@@ -17,25 +17,25 @@ export default class Login extends React.Component {
     handlePW2Change = (value) => this.setState({ password2: value })
 
     handleSubmit = () => {
+        console.log('handling submit')
         // check if passwords match
         if (this.state.email && 
-        this.state.password1 === this.state.password2){
-        const {name, email, password1 } = this.state
-        // check if user exists
-        let newUser= { name, email, password:password1}
-        let userExists = this.props.users.find(u => u.email === email)
-        userExists && alert("User already exists. Please try a different email.")
-        !userExists && this.props.createUser(newUser)
-            .then(response => 
-            this.props.handleSignup(response.email, response.password)
-        )
-
-        // run a fetch POST and redirect to main page : alert that pw are not identical 
-    }else{
-        alert("Please verify your input!")
-    }
+        this.state.password1 === this.state.password2)
+            {
+            const {name, email, password1 } = this.state
+            // // check if user exists
+            let newUser= { name, email, password:password1}
+            let userExists = this.props.users.find(u => u.email === email)
+            userExists && alert("User already exists. Please try a different email.")
+            !userExists && this.props.createUser(newUser)
+                .then(re=> console.log('created user', re))
+                .then(response => this.props.history.push('/login'))
+        }else{
+            alert("Please verify your input!")
+        }
     }
 
+    
 
     render() {
         return (
@@ -47,7 +47,7 @@ export default class Login extends React.Component {
                             <Form.Input placeholder="Name" type='text' onChange={event=>this.handleNameChange(event.target.value)} />
                             <Form.Input placeholder="Password" type='password' onChange={ event => this.handlePW1Change(event.target.value) }/>
                         <Form.Input placeholder="Repeat password" type='password' onChange={ event => this.handlePW2Change(event.target.value) } />
-                        <Button className="ui purple basic button" onClick={this.handleSubmit}>Sign up</Button>
+                        <Button onClick={ this.handleSubmit } className="ui purple basic button" >Sign up</Button>
                     </Form >
                     <a href='/login'>Already have an account? Click here to log in.</a>
                 </Segment >

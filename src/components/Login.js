@@ -7,6 +7,9 @@ export default class Login extends React.Component {
     password: ''
   }
 
+componentDidMount = () =>{
+  // this.props.fetchAndSetUsers()
+}
 
 handleEmailChange = (email) =>
   this.setState({email})
@@ -15,14 +18,17 @@ handlePasswordChange = (password) =>
   this.setState({ password })
 
 handleSubmit=() =>{
-  const {email, password} = this.state
-  let result = this.props.handleLogin(email, password)
-  result?
-  this.props.history.push({
-    pathname: `/spending`,
-  })
-  :
-  console.log('nope')
+  this.props.fetchAndSetUsers()
+    .then( () => {
+      const {email, password} = this.state
+      let result = this.props.handleLogin(email, password)
+      result?
+      this.props.history.push({
+        pathname: `/spending`,
+      })
+      :
+      console.log('nope')
+    })
 }
 
   render() {

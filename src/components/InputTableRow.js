@@ -34,7 +34,7 @@ export default class InputTableRow extends React.Component {
                 this.props.handleClick(this.state.input, this.props.item[0])
               }
             >
-              Submit
+              Add
             </Button>
           </label>
         </Table.Cell>
