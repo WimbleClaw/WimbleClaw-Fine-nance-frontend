@@ -178,8 +178,9 @@ export default class MainPage extends React.Component {
                             />
                             <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } /> } />
                             <Route exact path='/signup' component={ props => <Signup { ...props } createUser={ this.createUser } handleSignup={ this.handleSignup } /> } />
-                            {/* otherwise    */ }
-                        </Switch> :
+                            <Route path='/:error' component={ props => <Redirect to='/' /> } />
+                        </Switch>
+                         :
                         <Switch>
                             <Route exact path='/'
                                 component={ (props) => this.state.currentUser ? <Redirect to={ '/spending' } /> : <HomePage { ...props } /> }
