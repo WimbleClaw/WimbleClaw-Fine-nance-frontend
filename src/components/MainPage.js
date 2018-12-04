@@ -14,7 +14,7 @@ import HomePage from "./HomePage"
 import CreateSpendingsForm from './CreateSpendingsForm'
 
 const usersURL = "http://localhost:3000/api/v1/users";
-const spendingsURL = "http://localhost:3000/api/v1/spendings";
+
 
 export default class MainPage extends React.Component {
     state = {
@@ -25,19 +25,18 @@ export default class MainPage extends React.Component {
     }
 
 
-    postSpending = spending => {
-        return fetch(`${spendingsURL}/`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(spending)
-        }).then(resp => resp.json());
-    };
+    // postSpending = spending => {
+    //     return fetch(`${spendingsURL}/`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(spending)
+    //     }).then(resp => resp.json());
+    // };
 
 
     createUser = object => {
-
         return fetch(usersURL, {
             method: "POST",
             headers: {
@@ -48,24 +47,32 @@ export default class MainPage extends React.Component {
         
     };
 
-
-    // transfered from inputTableRow:
-    spendingPatchRequest = (spending) => {
-        return fetch(`${spendingsURL}/${spending.id}`, {
+    patchUser = object => {
+        return fetch(`${usersURL}/${object.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(spending)
-        }).then(resp => resp.json());
-    }
+            body: JSON.stringify(object)
+        }).then(resp => resp.json()).then(resp=>console.log(resp));
+    };
+    // // transfered from inputTableRow:
+    // spendingPatchRequest = (spending) => {
+    //     return fetch(`${spendingsURL}/${spending.id}`, {
+    //         method: "PATCH",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(spending)
+    //     }).then(resp => resp.json());
+    // }
 
-    updateSpending = (value, spendingArg, item) => {
-        let spending = { ...spendingArg }
-        spending[item] += parseInt(value)
-        this.spendingPatchRequest(spending)
-        this.updateSpendingOnPage(item, value)
-    }
+    // updateSpending = (value, spendingArg, item) => {
+    //     let spending = { ...spendingArg }
+    //     spending[item] += parseInt(value)
+    //     this.spendingPatchRequest(spending)
+    //     this.updateSpendingOnPage(item, value)
+    // }
 
     updateSpendingOnPage = (parameter, value) => {
         let user = JSON.stringify(this.state.currentUser)
@@ -75,36 +82,36 @@ export default class MainPage extends React.Component {
         this.setState({ currentUser: user })
     }
 
-    // 
-    handleSignup=(email, password, spending)=>{
-        this.fetchUsers()
-            .then(users => this.setState({ users })).then(
-            () => 
-                {
-                    let foundUser = this.state.users
-                        .find(user => user.email.toLowerCase() === email.toLowerCase() && user.password === password)
+    // // 
+    // handleSignup=(email, password, spending)=>{
+    //     this.fetchUsers()
+    //         .then(users => this.setState({ users })).then(
+    //         () => 
+    //             {
+    //                 let foundUser = this.state.users
+    //                     .find(user => user.email.toLowerCase() === email.toLowerCase() && user.password === password)
                     
-                    this.setState({ loggedIn: foundUser.id })
-                    this.setState({ currentUser: foundUser })
-                    spending.user_id = foundUser.id
+    //                 this.setState({ loggedIn: foundUser.id })
+    //                 this.setState({ currentUser: foundUser })
+    //                 spending.user_id = foundUser.id
 
-                    this.postSpending(spending).then(resp=>{
-                        console.log('heres the entire response:', resp)
-                        let user = {...this.state.currentUser}
-                        console.log('user:', user)
-                        user.spending = resp
-                        console.log('user after setting .spending', user)
-                        this.setState ({currentUser: user})
-                        console.log('postSpending response:', resp)
-                        console.log('logged in (id) :', this.state.loggedIn)
-                        console.log('logged in as :', this.state.currentUser)
+    //                 this.postSpending(spending).then(resp=>{
+    //                     console.log('heres the entire response:', resp)
+    //                     let user = {...this.state.currentUser}
+    //                     console.log('user:', user)
+    //                     user.spending = resp
+    //                     console.log('user after setting .spending', user)
+    //                     this.setState ({currentUser: user})
+    //                     console.log('postSpending response:', resp)
+    //                     console.log('logged in (id) :', this.state.loggedIn)
+    //                     console.log('logged in as :', this.state.currentUser)
 
-                        return <Redirect to={ '/spending' } />
-                         }
-                        )
-                }
-        )
-    }
+    //                     return <Redirect to={ '/spending' } />
+    //                      }
+    //                     )
+    //             }
+    //     )
+    // }
 
 
     handleLogin = (email, password) => {
@@ -126,9 +133,9 @@ export default class MainPage extends React.Component {
         return fetch(`${usersURL}/`).then(resp => resp.json())
     };
 
-    fetchSpendings = () => {
-        return fetch(`${spendingsURL}/`).then(resp => resp.json());
-    };
+    // fetchSpendings = () => {
+    //     return fetch(`${spendingsURL}/`).then(resp => resp.json());
+    // };
 
     componentDidMount() {
         this.fetchUsers()
@@ -136,8 +143,8 @@ export default class MainPage extends React.Component {
             .then(e => this.currentUser())
             .then(() => this.findAllFollowees())
 
-        this.fetchSpendings()
-            .then(spendings => this.setState({ spendings }))
+    //     this.fetchSpendings()
+    //         .then(spendings => this.setState({ spendings }))
     }
 
     currentUser = () => {
@@ -164,33 +171,34 @@ export default class MainPage extends React.Component {
 
 
     addClick = (event, object) => {
-
+        console.log(object,event)
+        let value=parseInt(event)
+        let stat=object.toLowerCase()
         let user = this.state.currentUser;
         user = JSON.stringify(user);
         user = JSON.parse(user);
-
-        user.spending[object.toLowerCase()] =
-            parseInt(user.spending[object.toLowerCase()]) + parseInt(event);
-
+        user[stat]+=value
+        console.log('user', user)
         this.setState({
             currentUser: user
         });
-
-        this.patchSpending(user.spending);
+        console.log('currentUser', this.state.currentUser)
+        this.patchUser(user)
+        // this.patchSpending(user.spending);
     };
 
-    patchSpending = spending => {
-        console.log(spending);
-        return fetch(`${spendingsURL}/${spending.id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(spending)
-        })
-            .then(resp => resp.json())
-            .then(result => console.log("result", result));
-    };
+    // patchSpending = spending => {
+    //     console.log(spending);
+    //     return fetch(`${spendingsURL}/${spending.id}`, {
+    //         method: "PATCH",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(spending)
+    //     })
+    //         .then(resp => resp.json())
+    //         .then(result => console.log("result", result));
+    // };
 
 
 

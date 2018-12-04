@@ -7,8 +7,12 @@ import InputTable from "./InputTable";
 import SpendingPieChart from "./SpendingPieChart";
 
 export default class SpendingPage extends React.Component {
+  
   filterSpending() {
-    const spending = this.props.currentUser.spending;
+    const {rent,food,clothes,travel,other,utilities} = this.props.currentUser
+    const spending = {
+      rent, food, clothes, travel, other, utilities
+                    }
     let res = [];
     for (const key in spending) {
       if (key === "id" || key === "user_id") {

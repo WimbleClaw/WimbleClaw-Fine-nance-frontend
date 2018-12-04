@@ -16,6 +16,17 @@ export default class Adapter extends React.Component {
     return fetch(`${usersURL}/${userId}`).then(resp => resp.json());
   };
 
+
+  patchUser = object => {
+    return fetch(`usersURL/${object.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(object)
+    }).then(resp => resp.json());
+  };
+
   createUser = object => {
     return fetch(usersURL, {
       method: "POST",
