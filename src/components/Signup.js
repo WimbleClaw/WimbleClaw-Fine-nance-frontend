@@ -11,6 +11,10 @@ export default class Login extends React.Component {
         password2: ''
     }
 
+    tokenGenerator =() => {
+        return Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2)
+    }
+
     handleEmailChange=(value)=>this.setState({email: value})
     handleNameChange = (value) => this.setState({ Name: value })
     handlePW1Change = (value) => this.setState({ password1: value })
@@ -23,13 +27,13 @@ export default class Login extends React.Component {
         this.state.password1 === this.state.password2)
             {
             const {name, email, password1 } = this.state
-            // // check if user exists
-            let newUser= { name, email, password:password1}
+            const token = this.tokenGenerator()
+            let newUser= { name, email, password:password1, token}
             let userExists = this.props.users.find(u => u.email === email)
             userExists && alert("User already exists. Please try a different email.")
             !userExists && this.props.createUser(newUser)
                 .then(re=> console.log('created user', re))
-                .then(response => this.props.history.push('/login'))
+                .then(() => this.props.history.push('/login'))
         }else{
             alert("Please verify your input!")
         }

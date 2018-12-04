@@ -8,7 +8,7 @@ export default class Login extends React.Component {
   }
 
 componentDidMount = () =>{
-  // this.props.fetchAndSetUsers()
+  // DO NOT SET STATE IN COMPONENT MOUNTS!
 }
 
 handleEmailChange = (email) =>

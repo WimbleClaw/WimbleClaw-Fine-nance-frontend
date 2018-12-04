@@ -84,15 +84,6 @@ export default class MainPage extends React.Component {
         }
             
 
-   
-
-    // componentDidMount(){
-    //         this.fetchAndSetUsers()
-    //             .then(e => this.currentUser())
-    //             .then(() => this.findAllFollowees())
-        
-    // }
-
     currentUser = () => {
         let currentUserObject = this.state.users.find(user => user.id === this.state.loggedIn)
         this.setState({ currentUser: currentUserObject })
