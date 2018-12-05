@@ -16,16 +16,16 @@ export default class SideBar extends React.Component {
 
     logout = () => {
         localStorage.clear()
-        // this.props.clearUser()
+        this.props.clearUser()
         // console.log('props?', this)
-        this.setState({ logout: true})
+        // this.setState({ logout: true})
         }
 
     render() {
         const {logout} = this.state
-        if (logout){
-            return <Redirect to={'/login'} />
-        }
+        // if (logout){
+        //     return <Redirect to={'/login'} />
+        // }
         return <div>
             <h4>Welcome, {this.props.currentUser.name}!</h4>
             <Link to={`/`} >
