@@ -21,7 +21,7 @@ export default class Login extends React.Component {
     handlePW2Change = (value) => this.setState({ password2: value })
 
     handleSubmit = () => {
-        console.log('handling submit')
+    
         // check if passwords match
         if (this.state.email && 
         this.state.password1 === this.state.password2)
@@ -32,7 +32,7 @@ export default class Login extends React.Component {
             let userExists = this.props.users.find(u => u.email === email)
             userExists && alert("User already exists. Please try a different email.")
             !userExists && this.props.createUser(newUser)
-                .then(re=> console.log('created user', re))
+                
                 .then(() => this.props.history.push('/login'))
         }else{
             alert("Please verify your input!")

@@ -38,7 +38,7 @@ changeSaved = (value) => {
 
 
 submit = () =>{
-    console.log('submitting?')
+
    
         let objectiveObject={
                 user_id: this.props.currentUser.id,

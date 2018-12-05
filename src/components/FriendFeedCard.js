@@ -8,7 +8,7 @@ export default class FriendFeedCard extends React.Component {
 
     render() {
         const { friend } = this.props
-        console.log(friend.objectives)
+     
         const remainderPercentage=(current, fullSum)=>
                 Math.round(100-(current/fullSum)*100)
         return this.props.friend.objectives.map(objective=>

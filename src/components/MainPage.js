@@ -44,7 +44,7 @@ export default class MainPage extends React.Component {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(object)
-        }).then(resp => resp.json()).then(resp=>console.log(resp));
+        }).then(resp => resp.json());
     };
 
 
@@ -95,7 +95,9 @@ export default class MainPage extends React.Component {
             let followeeIds = this.state.currentUser.followees.map(f => f.id)
             let followeeObjects = this.state.users.filter(u => followeeIds.includes(u.id))
             this.setState({ followees: followeeObjects })
-        } else { console.log('no followees for the user or other error') }
+        } else {
+             console.log('no followees for the user or other error') 
+            }
     }
 
 
@@ -129,18 +131,18 @@ export default class MainPage extends React.Component {
 
 
     addClick = (event, object) => {
-        console.log(object,event)
+      
         let value=parseInt(event)
         let stat=object.toLowerCase()
         let user = this.state.currentUser;
         user = JSON.stringify(user);
         user = JSON.parse(user);
         user[stat]+=value
-        console.log('user', user)
+        
         this.setState({
             currentUser: user
         });
-        console.log('currentUser', this.state.currentUser)
+        
         this.patchUser(user)
        
     };

@@ -29,7 +29,7 @@ export default class MainPage extends React.Component {
   };
 
   render() {
-    console.log(this.props.currentUser)
+   
     return (
       <div>
         <Segment style={ { marginTop: '5em' } }>

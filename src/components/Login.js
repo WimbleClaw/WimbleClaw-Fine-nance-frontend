@@ -27,7 +27,7 @@ handleSubmit=() =>{
         pathname: `/spending`,
       })
       :
-      console.log('nope')
+      console.log('hi')
     })
 }
 

@@ -27,7 +27,7 @@ export default class ObjectivePage extends React.Component {
             let newObjective = JSON.stringify(this.state.objective);
             newObjective = JSON.parse(newObjective);
             newObjective.current_amount = this.state.value;
-            console.log("new", newObjective);
+            
             this.patchObjective(newObjective);
             this.setState({ objective: newObjective });
         } else {
@@ -42,12 +42,12 @@ export default class ObjectivePage extends React.Component {
     }
 
     componentUpdate() {
-        console.log(this.state.objective);
+       
     }
 
     // from adapter
     fetchObjective = objectiveId => {
-        console.log("clicked fetch objective thing");
+      
         return fetch(`${objectivesURL}/${objectiveId}`)
             .then(resp => resp.json())
             .then(objective => this.setState({ objective }));
