@@ -9,108 +9,133 @@ const usersURL = "http://localhost:3000/api/v1/users";
 
 // This is the page that we will use for the objective data
 export default class ObjectivePage extends React.Component {
-    state = {
-        objective: "",
-        objectives: [],
-        value: 0,
-        users: [],
-        amount: []
-    };
+  state = {
+    objective: "",
+    objectives: [],
+    value: 0,
+    users: [],
+    amount: []
+  };
 
-    handleChange = val => {
-        let value = parseInt(val);
-        this.setState({ value });
-    };
+  handleChange = val => {
+    let value = parseInt(val);
+    this.setState({ value });
+  };
 
-    handleSubmit = () => {
-        if (this.state.value <= this.state.objective.total_amount && this.state.value >= 0){
-            let newObjective = JSON.stringify(this.state.objective);
-            newObjective = JSON.parse(newObjective);
-            newObjective.current_amount = this.state.value;
-            console.log("new", newObjective);
-            this.patchObjective(newObjective);
-            this.setState({ objective: newObjective });
-        } else {
-            alert("Please provide a valid value!")
-        }
-    };
+  handleAdd = () => {
+    if (
+      this.state.value <= this.state.objective.total_amount &&
+      this.state.value >= 0
+    ) {
+      let newObjective = JSON.stringify(this.state.objective);
+      newObjective = JSON.parse(newObjective);
+      newObjective.current_amount = this.state.value;
+      newObjective.current_amount =
+        newObjective.current_amount + this.state.objective.current_amount;
 
-    componentDidMount() {
-        let objectiveId = this.props.match.params.id;
-        this.fetchObjective(objectiveId);
-        this.fetchUsers().then(users => this.setState({ users }));
+      this.patchObjective(newObjective);
+      this.setState({ objective: newObjective });
+      this.setState({ value: 0 });
+    } else {
+      alert("Please provide a valid value!");
     }
+  };
 
-    componentUpdate() {
-        console.log(this.state.objective);
+  handleSubtract = () => {
+    let newObjective = JSON.stringify(this.state.objective);
+    newObjective = JSON.parse(newObjective);
+    newObjective.current_amount = this.state.value;
+    if (
+      this.state.value <=
+        this.state.objective.current_amount - newObjective.current_amount &&
+      this.state.value >= 0
+    ) {
+      newObjective.current_amount =
+        this.state.objective.current_amount - newObjective.current_amount;
+      console.log("obj", this.state.objective.current_amount);
+      console.log("new", newObjective.current_amount);
+
+      this.patchObjective(newObjective);
+      this.setState({ objective: newObjective });
+      console.log("obj", this.state.objective);
+    } else {
+      alert("Please provide a valid value!");
     }
+  };
 
-    // from adapter
-    fetchObjective = objectiveId => {
-        console.log("clicked fetch objective thing");
-        return fetch(`${objectivesURL}/${objectiveId}`)
-            .then(resp => resp.json())
-            .then(objective => this.setState({ objective }));
-    };
+  componentDidMount() {
+    let objectiveId = this.props.match.params.id;
+    this.fetchObjective(objectiveId);
+    this.fetchUsers().then(users => this.setState({ users }));
+  }
 
-    getObjectiveFromLocation = () => {
-        const { objective } = this.props.location.state;
-        this.setState({ objective });
-    };
+  componentUpdate() {
+    console.log(this.state.objective);
+  }
 
-    setAmount() {
-        const obj = this.state.objective;
-        let res = [];
-        for (const key in obj) {
-            if (key === "id" || key === "user" || key === "name") {
-                continue;
-            }
-            res.push([key.charAt(0).toUpperCase() + key.slice(1), obj[key]]);
-        }
-        return res;
+  // from adapter
+  fetchObjective = objectiveId => {
+    return fetch(`${objectivesURL}/${objectiveId}`)
+      .then(resp => resp.json())
+      .then(objective => this.setState({ objective }));
+  };
+
+  getObjectiveFromLocation = () => {
+    const { objective } = this.props.location.state;
+    this.setState({ objective });
+  };
+
+  setAmount() {
+    const obj = this.state.objective;
+    let res = [];
+    for (const key in obj) {
+      if (key === "id" || key === "user" || key === "name") {
+        continue;
+      }
+      res.push([key.charAt(0).toUpperCase() + key.slice(1), obj[key]]);
     }
+    return res;
+  }
 
-    patchObjective = objective => {
-        fetch(`${objectivesURL}/${objective.id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(objective)
-        }).then(resp => resp.json());
-    };
-    //
+  patchObjective = objective => {
+    fetch(`${objectivesURL}/${objective.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(objective)
+    }).then(resp => resp.json());
+  };
+  //
 
-    fetchUsers = () => {
-        return fetch(`${usersURL}/`).then(resp => resp.json());
-    };
+  fetchUsers = () => {
+    return fetch(`${usersURL}/`).then(resp => resp.json());
+  };
 
-    render() {
-        const objectiveData = this.setAmount();
-        const { objective, value } = this.state;
-        let current_percentage =
-            (objective.current_amount / objective.total_amount) * 100;
-        let remaining_percentage = 100 - current_percentage;
-        return (
-            <div>
-                <h2>{ this.state.objective.name }</h2>
-                { objectiveData.length !== 0 ? (
-                    <SpendingPieChart data={ objectiveData } />
-                ) : null }
-                <br />
-                <div>
-                    { objectiveData.length !== 0 ? (
-                        <ObjectiveTable
-                            handleSubmit={ this.handleSubmit }
-                            item={ objectiveData }
-                            handleChange={ this.handleChange }
-                            handleSubmit={ this.handleSubmit }
-                        />
-                    ) : null }
-                </div>
-                 
-                
-            </div>
-        );
-    }
+  render() {
+    const objectiveData = this.setAmount();
+    const { objective, value } = this.state;
+    let current_percentage =
+      (objective.current_amount / objective.total_amount) * 100;
+    let remaining_percentage = 100 - current_percentage;
+    return (
+      <div>
+        <h2>{this.state.objective.name}</h2>
+        {objectiveData.length !== 0 ? (
+          <SpendingPieChart data={objectiveData} />
+        ) : null}
+        <br />
+        <div>
+          {objectiveData.length !== 0 ? (
+            <ObjectiveTable
+              item={objectiveData}
+              handleChange={this.handleChange}
+              handleAdd={this.handleAdd}
+              handleSubtract={this.handleSubtract}
+            />
+          ) : null}
+        </div>
+      </div>
+    );
+  }
 }
