@@ -35,7 +35,6 @@ export default class ObjectivePage extends React.Component {
 
       this.patchObjective(newObjective);
       this.setState({ objective: newObjective });
-      this.setState({ value: 0 });
     } else {
       alert("Please provide a valid value!");
     }
