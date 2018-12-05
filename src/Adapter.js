@@ -3,7 +3,7 @@ import React from "react";
 const usersURL = "http://localhost:3000/api/v1/users";
 const followsURL = "http://localhost:3000/api/v1/follows";
 const objectivesURL = "http://localhost:3000/api/v1/objectives";
-
+const spendingsURL = "http://localhost:3000/api/v1/spendings";
 
 export default class Adapter extends React.Component {
   //------------USER--------------
@@ -14,17 +14,6 @@ export default class Adapter extends React.Component {
 
   fetchUser = userId => {
     return fetch(`${usersURL}/${userId}`).then(resp => resp.json());
-  };
-
-
-  patchUser = object => {
-    return fetch(`usersURL/${object.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(object)
-    }).then(resp => resp.json());
   };
 
   createUser = object => {
@@ -111,4 +100,37 @@ export default class Adapter extends React.Component {
 
   //--------------SPENDINGS------------
 
+  fetchSpendings = () => {
+    return fetch(`${spendingsURL}/`).then(resp => resp.json());
+  };
+
+  fetchSpending = spendingId => {
+    return fetch(`${spendingsURL}/${spendingId}`).then(resp => resp.json());
+  };
+
+  postSpending = spending => {
+    return fetch(`${spendingsURL}/${spending.id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(spending)
+    }).then(resp => resp.json());
+  };
+
+  patchSpending = spending => {
+    return fetch(`${spendingsURL}/${spending.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(spending)
+    }).then(resp => resp.json());
+  };
+
+  deleteSpending = spendingId => {
+    return fetch(`${spendingsURL}/${spendingId}`, {
+      method: "DELETE"
+    }).then(resp => resp.json());
+  };
 }
