@@ -14,3 +14,4 @@ const FriendCard = (props) =>
     </Feed>
 
 export default FriendCard
+// 
