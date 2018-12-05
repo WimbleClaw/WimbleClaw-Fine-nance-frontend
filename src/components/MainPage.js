@@ -97,7 +97,9 @@ export default class MainPage extends React.Component {
             this.setState({ followees: followeeObjects })
         } else { console.log('no followees for the user or other error') }
     }
-
+    
+    clearUser=()=>
+        this.setState({ currentUser: ''})
 
     addFriendOnPage=(friend)=>{
         let user = {...this.state.currentUser}
@@ -119,6 +121,19 @@ export default class MainPage extends React.Component {
          return true
         }
     }
+
+    componentDidMount=()=>{
+        if (localStorage.user) {
+            let user = JSON.parse(localStorage.user)
+            this.fetchAndSetUsers().then( () => {
+            let found = this.state.users.find(u=> 
+                user.email===u.email && user.password===u.password)
+                console.log('USER:',found)
+                this.setState({currentUser: found})
+            })
+        }
+    }
+
 
     addObjectiveToCurrentUser = (objective) => {
         let user = { ...this.state.currentUser }
@@ -173,8 +188,6 @@ export default class MainPage extends React.Component {
                          :
                         <Switch>
 
-                            
-
                             <Route exact path='/'
                                 component={ (props) => this.state.currentUser ? <Redirect to={ '/spending' } /> : <HomePage { ...props } /> }
                             />
@@ -183,8 +196,8 @@ export default class MainPage extends React.Component {
                                 <Grid.Row>
                                     <Grid.Column width={ 12 }>
                                         <Switch>
+                                            <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } fetchAndSetUsers={ this.fetchAndSetUsers } /> } />
 
-                                       
 
                                             <Route exact path='/spending'
                                                 component={ props => <SpendingPage
@@ -214,12 +227,15 @@ export default class MainPage extends React.Component {
 
                                     <Grid.Column width={ 4 }>
                                         <SideBar
+                                            clearUser={ this.clearUser }
                                             objectives={ this.state.currentUser.objectives }
                                             addObjectiveToCurrentUser={ this.addObjectiveToCurrentUser }
                                             currentUser={ this.state.currentUser }
                                             friends={ this.state.followees }
                                             addFriendOnPage={ this.addFriendOnPage }
-                                            users={this.state.users} />
+                                            users={this.state.users}
+                                            
+                                            />
                                     </Grid.Column>
                                 </Grid.Row>
                             </Grid>
@@ -228,7 +244,6 @@ export default class MainPage extends React.Component {
                 </div>
 
             </BrowserRouter>
-        );
+        )
     }
-
 }

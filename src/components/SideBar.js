@@ -1,20 +1,39 @@
 import React from 'react'
 import {  Segment, Button } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import ObjectiveCard from './ObjectiveCard'
 import FriendsList from './FriendsList'
 import FollowForm from './Followform'
+import Login from './Login'
 // This is the entire sidebar
 
 export default class SideBar extends React.Component {
 
+    state={
+        logout: false
+    }
+
+    logout = () => {
+        localStorage.clear()
+        // this.props.clearUser()
+        // console.log('props?', this)
+        this.setState({ logout: true})
+        }
+
     render() {
+        const {logout} = this.state
+        if (logout){
+            return <Redirect to={'/login'} />
+        }
         return <div>
             <h4>Welcome, {this.props.currentUser.name}!</h4>
             <Link to={`/`} >
                 <Button fluid> Home</Button><br />
             </Link>
+            <button onClick={ this.logout } >Log out!
+            </button>
+
             <Link to={`/objectives/create`} >
                 <Button className="ui purple basic button" fluid>Create a new objective! </Button>
             </Link>

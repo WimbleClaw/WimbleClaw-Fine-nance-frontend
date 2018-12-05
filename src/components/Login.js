@@ -22,11 +22,12 @@ handleSubmit=() =>{
     .then( () => {
       const {email, password} = this.state
       let result = this.props.handleLogin(email, password)
-      result?
+      let storedUser = {email, password}
+      result && localStorage.setItem('user', JSON.stringify(storedUser))
       this.props.history.push({
         pathname: `/spending`,
       })
-      :
+    
       console.log('nope')
     })
 }
