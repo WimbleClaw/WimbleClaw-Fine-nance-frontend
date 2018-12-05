@@ -42,13 +42,14 @@ export default class ObjectivePage extends React.Component {
   };
 
   handleSubtract = () => {
+    let newObjective = JSON.stringify(this.state.objective);
+    newObjective = JSON.parse(newObjective);
+    newObjective.current_amount = this.state.value;
     if (
-      this.state.value <= this.state.objective.total_amount &&
+      this.state.value <=
+        this.state.objective.current_amount - newObjective.current_amount &&
       this.state.value >= 0
     ) {
-      let newObjective = JSON.stringify(this.state.objective);
-      newObjective = JSON.parse(newObjective);
-      newObjective.current_amount = this.state.value;
       newObjective.current_amount =
         this.state.objective.current_amount - newObjective.current_amount;
       console.log("obj", this.state.objective.current_amount);
